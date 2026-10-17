@@ -26,8 +26,14 @@ assets/img/                fotka do úvodu, práce (Instagram), loga zákazník�
    Formulář posílá: jmeno, email, telefon, pocet, typ, rozmer, umisteni, material, termin, vlastni_textil, prilohy[], zprava, souhlas.
    Pole `web` je skrytá past na spamboty – na serveru zahodit zprávy, kde je vyplněné.
 2. **Odkazy označené [DOPLNIT]** v `index.html`: vzorník barev, zásady ochrany osobních údajů, Facebook.
-3. **Instagram** – mřížka `.tv-ig__grid` (atribut `data-instagram-feed`) má zatím 8 ručně vybraných fotek.
-   Napojení: Behold.so / Elfsight widget, nebo Instagram Graph API – stačí generovat stejné `<a class="tv-polaroid">` karty.
+3. **Instagram** – galerie (6 posledních příspěvků) se plní automaticky z Behold.so feedu.
+   - Skript `scripts/sync-instagram.mjs` stáhne příspěvky, fotky uloží do `assets/img/instagram/`
+     a přepíše karty v `index.html` mezi `<!-- INSTAGRAM:START -->` a `<!-- INSTAGRAM:END -->`.
+   - GitHub Action `.github/workflows/instagram.yml` ho spouští každý den (~6:17) a změny sama commitne.
+     Ručně: záložka Actions → „Instagram galerie" → Run workflow, nebo lokálně `node scripts/sync-instagram.mjs`.
+   - Když feed selže, web dál ukazuje poslední fotky.
+   - Feed klienta: v GitHubu Settings → Secrets and variables → Actions → Variables přidat `BEHOLD_FEED_URL`
+     (nebo přepsat výchozí URL na začátku skriptu).
 4. **Mapa** – v kontaktu je kreslená mapa s odkazem do Google Map. Pokud chcete živou mapu,
    vložte `<iframe>` z Google Maps do `.tv-map` místo `<svg class="tv-map__roads">`.
 5. Favicon a sdílecí obrázek (`og:image`) – teď se používá fotka z úvodu.
