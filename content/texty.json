@@ -1,6 +1,6 @@
 {
   "uvod": {
-    "stitek": "Strojová výšivka · Kralupy nad Vltavou",
+    "stitek": "Strojová výšivka · Kralupy nad Vltavous",
     "podtitul": "Nášivky, výšivky a reklamní textil pro firmy, týmy, spolky i jednotlivce.",
     "text": "Profesionální strojová výšivka na kvalitních materiálech a nabídka přesně na míru. Pošlete nápad, zbytek vyšijeme my.",
     "poznamka": "Kalkulace zdarma a nezávazně. Slibujeme, že to nebude píchat."
@@ -66,9 +66,6 @@
   "technika": {
     "uvod": "Šijeme na japonském stroji Tajima a viskózových nitích Marathon. Proto se výšivka leskne jako hedvábí."
   },
-  "kontakt": {
-    "uvod": "V pracovní dny od 8 do 17 jsme na telefonu i u stroje. Na provozovnu se můžete zastavit po předchozí domluvě."
-  },
   "faq": [
     {
       "otazka": "Jak objednat?",
@@ -102,5 +99,8 @@
       "otazka": "Můžu si materiál prohlédnout?",
       "odpoved": "Ano, na provozovně po předchozí domluvě. Stačí zavolat."
     }
-  ]
+  ],
+  "kontakt": {
+    "uvod": "V pracovní dny od 8 do 17 jsme na telefonu i u stroje. Na provozovnu se můžete zastavit po předchozí domluvě."
+  }
 }
