@@ -1,0 +1,106 @@
+{
+  "uvod": {
+    "stitek": "Strojová výšivka · Kralupy nad Vltavou",
+    "podtitul": "Nášivky, výšivky a reklamní textil pro firmy, týmy, spolky i jednotlivce.",
+    "text": "Profesionální strojová výšivka na kvalitních materiálech a nabídka přesně na míru. Pošlete nápad, zbytek vyšijeme my.",
+    "poznamka": "Kalkulace zdarma a nezávazně. Slibujeme, že to nebude píchat."
+  },
+  "zaruky": {
+    "zaruka1": {
+      "nadpis": "Kalkulace zdarma",
+      "text": "Pošlete nápad, my spočítáme cenu. Bez závazků a bez drobného písma."
+    },
+    "zaruka2": {
+      "nadpis": "Odeslání do 3–7 dní",
+      "text": "Počítáno od schválení vzoru. Ať to máte na sobě co nejdřív."
+    },
+    "zaruka3": {
+      "nadpis": "Nitě Marathon",
+      "text": "Kvalitní viskózové nitě s hedvábným leskem. Na výsledku je to poznat."
+    },
+    "zaruka4": {
+      "nadpis": "Malý i velký klient",
+      "text": "Jedna nášivka, nebo celá firemní kolekce. Každý je pro nás stejně důležitý."
+    }
+  },
+  "sluzby": {
+    "uvod": "Tři disciplíny, jedna jehla. Vyberte, co potřebujete, nebo nám rovnou napište, co máte v hlavě.",
+    "nasivky": {
+      "nadpis": "Nášivky",
+      "popis": "Samostatné výšivky k nažehlení, přilepení nebo na suchý zip. Na bundy, batohy, dresy i čepice.",
+      "hlaska": "Drží líp než novoroční předsevzetí."
+    },
+    "vysivky": {
+      "nadpis": "Výšivky",
+      "popis": "Vyšijeme váš vzor na vlastní textil, nebo na textil z naší nabídky.",
+      "hlaska": "Vaše logo, vaše triko, naše jehla."
+    },
+    "textil": {
+      "nadpis": "Reklamní textil",
+      "popis": "Oblečení pro firmy, týmy a akce. Ať je na první pohled jasné, kdo k sobě patří.",
+      "hlaska": "Teambuilding začíná u stejných triček."
+    }
+  },
+  "jak": {
+    "uvod": "Žádná byrokracie. Vy pošlete nápad, my se postaráme o zbytek a každý krok vám dáme ke schválení.",
+    "krok1": {
+      "nadpis": "Pošlete předlohu",
+      "text": "Logo, obrázek, nebo jen nápad na ubrousku. Stačí PNG, JPG, PDF, SVG nebo AI."
+    },
+    "krok2": {
+      "nadpis": "Kalkulace zdarma",
+      "text": "Spočítáme cenu podle velikosti, složitosti a počtu kusů. Zdarma a nezávazně."
+    },
+    "krok3": {
+      "nadpis": "Schválíte vzor",
+      "text": "Pošleme vám náhled výšivky. Dokud neřeknete ano, neuděláme ani steh."
+    },
+    "krok4": {
+      "nadpis": "Vyšijeme a odešleme",
+      "text": "Do 3–7 dní od schválení vzoru je balík na cestě. Doprava jednotně 100 Kč."
+    }
+  },
+  "instagram": {
+    "uvod": "Co zrovna sjelo ze stroje. Nejnovější práce sdílíme na Instagramu, mrkněte, co jsme vyšili jiným."
+  },
+  "technika": {
+    "uvod": "Šijeme na japonském stroji Tajima a viskózových nitích Marathon. Proto se výšivka leskne jako hedvábí."
+  },
+  "kontakt": {
+    "uvod": "V pracovní dny od 8 do 17 jsme na telefonu i u stroje. Na provozovnu se můžete zastavit po předchozí domluvě."
+  },
+  "faq": [
+    {
+      "otazka": "Jak objednat?",
+      "odpoved": "Nejlépe přes formulář níže, kam můžete rovnou přiložit předlohu. Ozveme se s kalkulací."
+    },
+    {
+      "otazka": "Jak dlouho to trvá?",
+      "odpoved": "Zakázku odešleme do 3–7 dní od potvrzení finálního vzoru. Záleží na počtu kusů."
+    },
+    {
+      "otazka": "Kolik stojí výšivka?",
+      "odpoved": "Cenu počítáme individuálně podle složitosti, velikosti a počtu kusů. Kalkulace je zdarma."
+    },
+    {
+      "otazka": "Kolik stojí vyšívací program?",
+      "odpoved": "0–1 500 Kč podle složitosti vzoru. Od 50 kusů a u opakovaných objednávek ho neúčtujeme."
+    },
+    {
+      "otazka": "Kolik stojí doprava?",
+      "odpoved": "Jednotně 100 Kč."
+    },
+    {
+      "otazka": "Jak se platí?",
+      "odpoved": "Převodem předem nebo na dobírku. Stálí zákazníci mohou platit na fakturu."
+    },
+    {
+      "otazka": "Můžu poslat vlastní textil?",
+      "odpoved": "Ano. Pošlete ho na naši adresu (Nad Rybníkem 180, 278 01 Kralupy nad Vltavou) a ve formuláři zaškrtněte „Mám vlastní textil“."
+    },
+    {
+      "otazka": "Můžu si materiál prohlédnout?",
+      "odpoved": "Ano, na provozovně po předchozí domluvě. Stačí zavolat."
+    }
+  ]
+}
