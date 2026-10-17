@@ -2,7 +2,13 @@
 // Texty webu z administrace (Pages CMS) pro topvysivka.cz
 // Načte content/texty.json a v index.html přepíše:
 //  - obsah mezi značkami <!--t:klic-->…<!--/t--> (klíč = cesta v JSON, např. sluzby.nasivky.popis),
-//  - FAQ mezi <!--faq:start--> a <!--faq:end--> (vygeneruje ze seznamu "faq").
+//  - FAQ mezi <!--faq:start--> a <!--faq:end--> (vygeneruje ze seznamu "faq"),
+//  - <title> podle seo.titulek,
+//  - atributy tagů s data-t="atribut=zdroj;…", kde zdroj je:
+//      klic            hodnota klíče (placeholder, value, content, data-count…)
+//      tel:klic        odkaz na telefon (tel:+420…, bez mezer)
+//      mailto:klic     odkaz na e-mail
+//      @mapa / @trasa  odkaz do Google Map na adresu kontakt.adresa_ulice + kontakt.adresa_mesto
 // Texty se escapují jako HTML. Chybějící nebo prázdný klíč = zůstane původní text.
 // Když se nic nezměnilo, index.html se nepřepisuje.
 //
@@ -19,6 +25,7 @@ const FAQ_START = '<!--faq:start-->';
 const FAQ_END = '<!--faq:end-->';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
 
 // Text z administrace: řetězec bez okrajových mezer a zalomení řádků, jinak null
 const textOf = (v) => {
@@ -28,6 +35,25 @@ const textOf = (v) => {
 };
 
 const lookup = (data, key) => key.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), data);
+
+// Hodnota atributu podle zdroje z data-t, nebo null (atribut zůstane, jak je)
+function attrValue(data, src) {
+  if (src === '@mapa' || src === '@trasa') {
+    const ulice = textOf(lookup(data, 'kontakt.adresa_ulice'));
+    const mesto = textOf(lookup(data, 'kontakt.adresa_mesto'));
+    if (!ulice || !mesto) return null;
+    const adresa = `${ulice}, ${mesto}`;
+    return src === '@mapa'
+      ? 'https://www.google.com/maps/search/?api=1&' + new URLSearchParams({ query: adresa })
+      : 'https://www.google.com/maps/dir/?api=1&' + new URLSearchParams({ destination: adresa });
+  }
+  const m = src.match(/^(tel:|mailto:)?(.+)$/);
+  const v = textOf(lookup(data, m[2]));
+  if (v === null) return null;
+  if (m[1] === 'tel:') return 'tel:' + v.replace(/[^\d+]/g, '');
+  if (m[1] === 'mailto:') return 'mailto:' + v;
+  return v;
+}
 
 const FAQ_ICON = '<span class="tv-qa__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></span>';
 
@@ -48,6 +74,20 @@ async function main() {
     if (t === null) { missing.push(key); return whole; }
     return `<!--t:${key}-->${esc(t)}<!--/t-->`;
   });
+
+  next = next.replace(/<[a-z][^<>]*\sdata-t="([^"]*)"[^<>]*>/g, (tag, spec) => {
+    for (const part of spec.split(';')) {
+      const [name, src] = part.split('=');
+      const v = attrValue(data, src);
+      if (v === null) { missing.push(src); continue; }
+      tag = tag.replace(new RegExp(`(\\s${name}=")[^"]*"`), (_, pre) => `${pre}${escAttr(v)}"`);
+    }
+    return tag;
+  });
+
+  const title = textOf(lookup(data, 'seo.titulek'));
+  if (title === null) missing.push('seo.titulek');
+  else next = next.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
 
   if (Array.isArray(data.faq)) {
     const a = next.indexOf(FAQ_START);

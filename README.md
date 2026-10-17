@@ -50,11 +50,16 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
   `.github/workflows/texts.yml` spustí `scripts/apply-texts.mjs`, ten přepíše texty v `index.html` a commitne je →
   Vercel web nasadí. Trvá to zhruba 1–2 minuty.
 - **Značky v `index.html`:** každý upravitelný text je obalený `<!--t:klic-->text<!--/t-->` (klíč = cesta v JSON,
-  např. `sluzby.nasivky.popis`). FAQ se generuje celé mezi `<!--faq:start-->` a `<!--faq:end-->`.
+  např. `sluzby.nasivky.popis`). Stejný klíč může být na stránce víckrát (menu, telefony, běžící pásy).
+  FAQ se generuje celé mezi `<!--faq:start-->` a `<!--faq:end-->`, `<title>` podle `seo.titulek`.
   Značky nemazat; text mezi nimi při ruční úpravě HTML přepíše další uložení v administraci.
-- **Co upravit jde:** úvod (štítek, podtitul, hlavní text, poznámka), záruky, služby, kroky „Jak to funguje“,
-  úvodní texty sekcí Instagram, Technická karta a Kontakt, a FAQ (otázky lze přidávat, mazat a přesouvat).
-- **Co ne:** velký nadpis v úvodu, nadpisy sekcí, tlačítka, kontaktní údaje, FAQ věta s telefonem.
+- **Atributy:** tag s `data-t="atribut=zdroj;…"` dostane hodnotu atributu z JSON (placeholdery, hodnoty voleb
+  ve formuláři, `data-count` čísel, meta popisy). Zdroj `tel:klic` / `mailto:klic` udělá odkaz na telefon / e-mail,
+  `@mapa` a `@trasa` odkaz do Google Map z `kontakt.adresa_ulice` + `kontakt.adresa_mesto`.
+- **Co upravit jde:** všechny texty na stránce – SEO popisky, menu, nadpisy, tlačítka, běžící pásy, služby, kroky,
+  technická karta, FAQ (otázky lze přidávat, mazat a přesouvat), celý formulář, kontakty a patička.
+- **Co ne:** fotky a loga, karty Instagram galerie (plní se samy), odkazy na Instagram/Facebook/vzorník/zásady,
+  chybové hlášky formuláře v `assets/js/main.js`.
 - Texty se escapují jako HTML (žádné tagy). Chybějící nebo prázdný text = na webu zůstane původní.
 - **Nový upravitelný text:** obalit ho v `index.html` značkami, přidat klíč do `content/texty.json`
   a pole do `.pages.yml`.

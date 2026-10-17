@@ -1,9 +1,40 @@
 {
+  "seo": {
+    "titulek": "Top výšivka – strojová výšivka, nášivky a reklamní textil | Kralupy nad Vltavou",
+    "popis": "Strojová výšivka z Kralup nad Vltavou. Nášivky, výšivky na textil a reklamní textil pro firmy, týmy i jednotlivce. Kalkulace zdarma, odeslání do 3–7 dní od schválení vzoru.",
+    "sdileni_nadpis": "Top výšivka – vyšijeme cokoliv, co si vymyslíte",
+    "sdileni_popis": "Nášivky, výšivky a reklamní textil. Kalkulace zdarma."
+  },
+  "menu": {
+    "logo": "Top výšivka",
+    "sluzby": "Služby",
+    "jak": "Jak to funguje",
+    "reference": "Reference",
+    "faq": "FAQ",
+    "kontakt": "Kontakt",
+    "tlacitko": "Chci nabídku"
+  },
   "uvod": {
     "stitek": "Strojová výšivka · Kralupy nad Vltavou",
     "podtitul": "Nášivky, výšivky a reklamní textil pro firmy, týmy, spolky i jednotlivce.",
+    "nadpis1": "Vyšijeme",
+    "nadpis2": "cokoliv,",
+    "nadpis3": "co si vymyslíte.",
     "text": "Profesionální strojová výšivka na kvalitních materiálech a nabídka přesně na míru. Pošlete nápad, zbytek vyšijeme my.",
-    "poznamka": "Kalkulace zdarma a nezávazně. Slibujeme, že to nebude píchat."
+    "tlacitko1": "Chci nabídku",
+    "tlacitko2": "Ukázky prací",
+    "poznamka": "Kalkulace zdarma a nezávazně. Slibujeme, že to nebude píchat.",
+    "foto_stitek": "Zblízka je to ještě hezčí"
+  },
+  "pasky": {
+    "horni1": "Kalkulace zdarma",
+    "horni2": "Nitě Marathon",
+    "horni3": "Odeslání do 3–7 dní",
+    "horni4": "Kralupy nad Vltavou",
+    "dolni1": "Nášivky",
+    "dolni2": "Výšivky",
+    "dolni3": "Reklamní textil",
+    "dolni4": "Vyšijeme cokoliv"
   },
   "zaruky": {
     "zaruka1": {
@@ -24,24 +55,33 @@
     }
   },
   "sluzby": {
+    "stitek": "Služby",
+    "nadpis1": "Co pro vás",
+    "nadpis2": "vyšijeme",
     "uvod": "Tři disciplíny, jedna jehla. Vyberte, co potřebujete, nebo nám rovnou napište, co máte v hlavě.",
     "nasivky": {
       "nadpis": "Nášivky",
       "popis": "Samostatné výšivky k nažehlení, přilepení nebo na suchý zip. Na bundy, batohy, dresy i čepice.",
-      "hlaska": "Drží líp než novoroční předsevzetí."
+      "hlaska": "Drží líp než novoroční předsevzetí.",
+      "tlacitko": "Chci nášivky"
     },
     "vysivky": {
       "nadpis": "Výšivky",
       "popis": "Vyšijeme váš vzor na vlastní textil, nebo na textil z naší nabídky.",
-      "hlaska": "Vaše logo, vaše triko, naše jehla."
+      "hlaska": "Vaše logo, vaše triko, naše jehla.",
+      "tlacitko": "Chci výšivku"
     },
     "textil": {
       "nadpis": "Reklamní textil",
       "popis": "Oblečení pro firmy, týmy a akce. Ať je na první pohled jasné, kdo k sobě patří.",
-      "hlaska": "Teambuilding začíná u stejných triček."
+      "hlaska": "Teambuilding začíná u stejných triček.",
+      "tlacitko": "Chci reklamní textil"
     }
   },
   "jak": {
+    "stitek": "Jak to funguje",
+    "nadpis1": "Čtyři stehy",
+    "nadpis2": "a je hotovo",
     "uvod": "Žádná byrokracie. Vy pošlete nápad, my se postaráme o zbytek a každý krok vám dáme ke schválení.",
     "krok1": {
       "nadpis": "Pošlete předlohu",
@@ -58,13 +98,56 @@
     "krok4": {
       "nadpis": "Vyšijeme a odešleme",
       "text": "Do 3–7 dní od schválení vzoru je balík na cestě. Doprava jednotně 100 Kč."
-    }
+    },
+    "bublina": "Šiju, šiješ, šijeme!"
   },
   "instagram": {
-    "uvod": "Co zrovna sjelo ze stroje. Nejnovější práce sdílíme na Instagramu, mrkněte, co jsme vyšili jiným."
+    "stitek": "@topvysivka.cz",
+    "nadpis1": "Čerstvě",
+    "nadpis2": "vyšito",
+    "uvod": "Co zrovna sjelo ze stroje. Nejnovější práce sdílíme na Instagramu, mrkněte, co jsme vyšili jiným.",
+    "tlacitko": "Další na Instagramu"
+  },
+  "reference": {
+    "stitek": "Vyšívali jsme pro",
+    "nadpis": "Naši spokojení zákazníci",
+    "seznam": "Mezi naše zákazníky patří Barrandov, Lukoil, Hotel Berg, TJ Sokol Zeměchy, Multiprint, City Flex Gym, SOS dekorace a Auto Černý."
   },
   "technika": {
-    "uvod": "Šijeme na japonském stroji Tajima a viskózových nitích Marathon. Proto se výšivka leskne jako hedvábí."
+    "stitek": "Technická karta",
+    "nadpis1": "Stroj",
+    "nadpis2": "& nitě",
+    "uvod": "Šijeme na japonském stroji Tajima a viskózových nitích Marathon. Proto se výšivka leskne jako hedvábí.",
+    "civky": "Až 15 barev nití v jednom vzoru.",
+    "stroj": "Tajima",
+    "stroj_popis": "Japonský vyšívací stroj",
+    "plocha_sirka": "360",
+    "plocha_vyska": "500",
+    "plocha_popis": "mm vyšívací plocha",
+    "barvy": "15",
+    "barvy_popis": "barev v jednom vzoru",
+    "rychlost": "1200",
+    "rychlost_popis": "stehů za minutu",
+    "parametr1": {
+      "nazev": "Nitě",
+      "hodnota": "Marathon, 100% viskóza"
+    },
+    "parametr2": {
+      "nazev": "Síla nití",
+      "hodnota": "120D/2 a 75D/2"
+    },
+    "parametr3": {
+      "nazev": "Povrch",
+      "hodnota": "Hedvábný lesk"
+    },
+    "tlacitko": "Vzorník barev"
+  },
+  "faq_sekce": {
+    "stitek": "FAQ",
+    "nadpis1": "Na co",
+    "nadpis2": "se ptáte",
+    "uvod_pred": "Nenašli jste odpověď? Zavolejte na",
+    "uvod_za": ", nebo napište do formuláře níže."
   },
   "faq": [
     {
@@ -100,7 +183,99 @@
       "odpoved": "Ano, na provozovně po předchozí domluvě. Stačí zavolat."
     }
   ],
+  "poptavka": {
+    "stitek": "Poptávka",
+    "nadpis1": "Pošlete",
+    "nadpis2": "nám nápad",
+    "uvod": "Vyplňte, co víte. Co nevíte, doladíme spolu. Kalkulaci posíláme zdarma a nezávazně.",
+    "bod1": "Stačí přibližný rozměr",
+    "bod2": "Předlohu přiložte rovnou",
+    "bod3": "Radši voláte?",
+    "jmeno": {
+      "popisek": "Jméno a příjmení *",
+      "napoveda": "Jana Nováková"
+    },
+    "email": {
+      "popisek": "E-mail *",
+      "napoveda": "jana@firma.cz"
+    },
+    "telefon": {
+      "popisek": "Telefon",
+      "napoveda": "+420 …"
+    },
+    "pocet": {
+      "popisek": "Počet kusů",
+      "napoveda": "např. 25"
+    },
+    "typ_nadpis": "Co potřebujete?",
+    "typ1": "Nášivka",
+    "typ2": "Výšivka",
+    "typ3": "Reklamní textil",
+    "typ4": "Nevím, poraďte",
+    "rozmer": {
+      "popisek": "Přibližný rozměr výšivky",
+      "napoveda": "např. 8 × 8 cm"
+    },
+    "umisteni": {
+      "popisek": "Umístění výšivky",
+      "napoveda": "hrudník vlevo, záda, rukáv…"
+    },
+    "material": {
+      "popisek": "Materiál",
+      "napoveda": "triko, mikina, čepice, taška…"
+    },
+    "termin": {
+      "popisek": "Požadovaný termín"
+    },
+    "vlastni_textil": "Mám vlastní textil a pošlu ho k vám",
+    "prilohy": "Přílohy",
+    "prilohy_info": "AI, PDF, SVG, PNG nebo JPG, max. 10 MB na soubor",
+    "nahrani_nadpis": "Hoďte sem logo, my ho prošijeme",
+    "nahrani_text": "Přetáhněte soubory sem, nebo klikněte a vyberte je.",
+    "zprava": {
+      "popisek": "Zpráva",
+      "napoveda": "Popište, co si představujete. Klidně vlastními slovy."
+    },
+    "souhlas_pred": "Souhlasím se",
+    "souhlas_odkaz": "zpracováním osobních údajů",
+    "souhlas_za": "pro vyřízení poptávky.",
+    "tlacitko": "Odeslat poptávku",
+    "pod_tlacitkem": "Ozveme se s kalkulací. Zdarma a nezávazně.",
+    "hotovo_nadpis": "Hotovo, jdeme vyšívat!",
+    "hotovo_text": "Poptávka je u nás. Mrkneme na ni a ozveme se vám s kalkulací.",
+    "hotovo_tlacitko": "Poslat další poptávku"
+  },
   "kontakt": {
-    "uvod": "V pracovní dny od 8 do 17 jsme na telefonu i u stroje. Na provozovnu se můžete zastavit po předchozí domluvě."
+    "stitek": "Kontakt",
+    "nadpis1": "Ozvěte",
+    "nadpis2": "se nám",
+    "uvod": "V pracovní dny od 8 do 17 jsme na telefonu i u stroje. Na provozovnu se můžete zastavit po předchozí domluvě.",
+    "telefon_nadpis": "Telefon",
+    "telefon1": "+420 734 395 056",
+    "telefon1_kratky": "734 395 056",
+    "telefon2": "+420 725 005 919",
+    "email_nadpis": "E-mail",
+    "email": "info@topvysivka.cz",
+    "adresa_nadpis": "Adresa provozovny",
+    "adresa_ulice": "Nad Rybníkem 180",
+    "adresa_mesto": "278 01 Kralupy nad Vltavou",
+    "mapa_stitek": "Nad Rybníkem 180, Kralupy n. Vlt.",
+    "navigovat": "Navigovat",
+    "doba_nadpis": "Otevírací doba",
+    "doba": "Po–Pá 8–17",
+    "doba_poznamka": "Návštěva po domluvě",
+    "fakturace_nadpis": "Fakturační údaje",
+    "firma": "Flavio company s.r.o.",
+    "ico_dic": "IČ 03923258 · DIČ CZ03923258"
+  },
+  "paticka": {
+    "popis": "Strojová výšivka z Kralup nad Vltavou. Nášivky, výšivky a reklamní textil s nabídkou na míru.",
+    "menu_nadpis": "Menu",
+    "kontakt_nadpis": "Kontakt",
+    "adresa": "Nad Rybníkem 180, Kralupy nad Vltavou",
+    "sledujte": "Sledujte nás",
+    "rozlouceni": "Ať to drží!",
+    "copyright": "© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258",
+    "zasady": "Zásady ochrany osobních údajů"
   }
 }

@@ -1,5 +1,6 @@
 # Administrace textů – Pages CMS (https://pagescms.org)
 # Upravuje jen content/texty.json; do index.html je promítne GitHub Action .github/workflows/texts.yml.
+# Pořadí a názvy polí musí odpovídat content/texty.json a značkám <!--t:…--> / data-t v index.html.
 
 content:
   - name: texty
@@ -8,141 +9,535 @@ content:
     path: content/texty.json
     format: json
     fields:
+      - name: seo
+        label: "Google a sdílení odkazu"
+        description: "Tyto texty nejsou vidět přímo na stránce."
+        type: object
+        fields:
+          - name: titulek
+            label: "Titulek stránky"
+            description: "Zobrazí se v záložce prohlížeče a jako nadpis ve výsledcích Googlu."
+            type: string
+            required: true
+          - name: popis
+            label: "Popis pro Google"
+            description: "Text pod nadpisem ve výsledcích vyhledávání. Ideálně do 160 znaků."
+            type: text
+            required: true
+          - name: sdileni_nadpis
+            label: "Nadpis při sdílení odkazu"
+            description: "Např. na Facebooku nebo ve WhatsAppu."
+            type: string
+            required: true
+          - name: sdileni_popis
+            label: "Popis při sdílení odkazu"
+            type: text
+            required: true
+
+      - name: menu
+        label: "Menu a logo"
+        description: "Platí pro horní menu, mobilní menu i menu v patičce."
+        type: object
+        fields:
+          - name: logo
+            label: "Název vedle loga"
+            type: string
+            required: true
+          - name: sluzby
+            label: "Položka „Služby“"
+            type: string
+            required: true
+          - name: jak
+            label: "Položka „Jak to funguje“"
+            type: string
+            required: true
+          - name: reference
+            label: "Položka „Reference“"
+            type: string
+            required: true
+          - name: faq
+            label: "Položka „FAQ“"
+            type: string
+            required: true
+          - name: kontakt
+            label: "Položka „Kontakt“"
+            type: string
+            required: true
+          - name: tlacitko
+            label: "Tlačítko v hlavičce"
+            type: string
+            required: true
+
       - name: uvod
-        label: Úvod (horní část stránky)
+        label: "Úvod (horní část stránky)"
         type: object
         fields:
           - name: stitek
-            label: Štítek nad nadpisem
+            label: "Štítek nad nadpisem"
             type: string
             required: true
           - name: podtitul
-            label: Podtitul pod štítkem
+            label: "Podtitul pod štítkem"
             type: text
+            required: true
+          - name: nadpis1
+            label: "Velký nadpis – 1. řádek"
+            description: "Krátké slovo. Nadpis se sám roztáhne přes celou šířku."
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Velký nadpis – 2. řádek"
+            description: "Krátké slovo. Nadpis se sám roztáhne přes celou šířku."
+            type: string
+            required: true
+          - name: nadpis3
+            label: "Pokračování nadpisu (podtržený text)"
+            type: string
             required: true
           - name: text
-            label: Hlavní text
+            label: "Hlavní text"
             type: text
             required: true
+          - name: tlacitko1
+            label: "Hlavní tlačítko"
+            type: string
+            required: true
+          - name: tlacitko2
+            label: "Druhé tlačítko"
+            type: string
+            required: true
           - name: poznamka
-            label: Poznámka pod tlačítky
+            label: "Poznámka pod tlačítky"
+            type: string
+            required: true
+          - name: foto_stitek
+            label: "Štítek na fotce"
+            type: string
+            required: true
+
+      - name: pasky
+        label: "Běžící pásy s textem"
+        description: "Dva pruhy s pohyblivým textem pod úvodem."
+        type: object
+        fields:
+          - name: horni1
+            label: "Horní pás – 1. text"
+            type: string
+            required: true
+          - name: horni2
+            label: "Horní pás – 2. text"
+            type: string
+            required: true
+          - name: horni3
+            label: "Horní pás – 3. text"
+            type: string
+            required: true
+          - name: horni4
+            label: "Horní pás – 4. text"
+            type: string
+            required: true
+          - name: dolni1
+            label: "Dolní pás – 1. text"
+            type: string
+            required: true
+          - name: dolni2
+            label: "Dolní pás – 2. text"
+            type: string
+            required: true
+          - name: dolni3
+            label: "Dolní pás – 3. text"
+            type: string
+            required: true
+          - name: dolni4
+            label: "Dolní pás – 4. text"
             type: string
             required: true
 
       - name: zaruky
-        label: Záruky (čtyři výhody pod úvodem)
+        label: "Záruky (čtyři výhody pod úvodem)"
         type: object
         fields:
           - name: zaruka1
-            label: 1. záruka
+            label: "1. záruka"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: zaruka2
-            label: 2. záruka
+            label: "2. záruka"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: zaruka3
-            label: 3. záruka
+            label: "3. záruka"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: zaruka4
-            label: 4. záruka
+            label: "4. záruka"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
 
       - name: sluzby
-        label: Služby
+        label: "Služby"
         type: object
         fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
           - name: uvod
-            label: Úvodní text sekce
+            label: "Úvodní text sekce"
             type: text
             required: true
           - name: nasivky
-            label: Karta „Nášivky“
+            label: "Karta „Nášivky“"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: popis, label: Popis, type: text, required: true }
-              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: popis
+                label: "Popis"
+                type: text
+                required: true
+              - name: hlaska
+                label: "Vtipná hláška"
+                type: string
+                required: true
+              - name: tlacitko
+                label: "Tlačítko"
+                type: string
+                required: true
           - name: vysivky
-            label: Karta „Výšivky“
+            label: "Karta „Výšivky“"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: popis, label: Popis, type: text, required: true }
-              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: popis
+                label: "Popis"
+                type: text
+                required: true
+              - name: hlaska
+                label: "Vtipná hláška"
+                type: string
+                required: true
+              - name: tlacitko
+                label: "Tlačítko"
+                type: string
+                required: true
           - name: textil
-            label: Karta „Reklamní textil“
+            label: "Karta „Reklamní textil“"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: popis, label: Popis, type: text, required: true }
-              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: popis
+                label: "Popis"
+                type: text
+                required: true
+              - name: hlaska
+                label: "Vtipná hláška"
+                type: string
+                required: true
+              - name: tlacitko
+                label: "Tlačítko"
+                type: string
+                required: true
 
       - name: jak
-        label: Jak to funguje
+        label: "Jak to funguje"
         type: object
         fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
           - name: uvod
-            label: Úvodní text sekce
+            label: "Úvodní text sekce"
             type: text
             required: true
           - name: krok1
-            label: 1. krok
+            label: "1. krok"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: krok2
-            label: 2. krok
+            label: "2. krok"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: krok3
-            label: 3. krok
+            label: "3. krok"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
           - name: krok4
-            label: 4. krok
+            label: "4. krok"
             type: object
             fields:
-              - { name: nadpis, label: Nadpis, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - name: nadpis
+                label: "Nadpis"
+                type: string
+                required: true
+              - name: text
+                label: "Text"
+                type: text
+                required: true
+          - name: bublina
+            label: "Bublina u maskota"
+            type: string
+            required: true
 
       - name: instagram
-        label: Instagram (Čerstvě vyšito)
+        label: "Instagram (Čerstvě vyšito)"
         type: object
         fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
           - name: uvod
-            label: Úvodní text sekce
-            description: Fotky se načítají z Instagramu automaticky, tady jde upravit jen text.
+            label: "Úvodní text sekce"
+            description: "Fotky se načítají z Instagramu automaticky, tady jdou upravit jen texty."
+            type: text
+            required: true
+          - name: tlacitko
+            label: "Tlačítko pod fotkami"
+            type: string
+            required: true
+
+      - name: reference
+        label: "Reference (loga zákazníků)"
+        type: object
+        fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis
+            label: "Nadpis"
+            type: string
+            required: true
+          - name: seznam
+            label: "Seznam zákazníků"
+            description: "Na stránce není vidět, čte ho Google a čtečky pro nevidomé. Loga se tu měnit nedají."
             type: text
             required: true
 
       - name: technika
-        label: Technická karta (Stroj & nitě)
+        label: "Technická karta (Stroj & nitě)"
         type: object
         fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
           - name: uvod
-            label: Úvodní text sekce
+            label: "Úvodní text sekce"
             type: text
+            required: true
+          - name: civky
+            label: "Popisek pod cívkami"
+            type: string
+            required: true
+          - name: stroj
+            label: "Značka stroje"
+            type: string
+            required: true
+          - name: stroj_popis
+            label: "Popis stroje"
+            type: string
+            required: true
+          - name: plocha_sirka
+            label: "Vyšívací plocha – šířka"
+            description: "Jen číslo."
+            type: string
+            required: true
+          - name: plocha_vyska
+            label: "Vyšívací plocha – výška"
+            description: "Jen číslo."
+            type: string
+            required: true
+          - name: plocha_popis
+            label: "Popisek pod plochou"
+            type: string
+            required: true
+          - name: barvy
+            label: "Počet barev"
+            description: "Jen číslo."
+            type: string
+            required: true
+          - name: barvy_popis
+            label: "Popisek pod počtem barev"
+            type: string
+            required: true
+          - name: rychlost
+            label: "Rychlost"
+            description: "Jen číslo, bez mezer."
+            type: string
+            required: true
+          - name: rychlost_popis
+            label: "Popisek pod rychlostí"
+            type: string
+            required: true
+          - name: parametr1
+            label: "1. parametr"
+            type: object
+            fields:
+              - name: nazev
+                label: "Název"
+                type: string
+                required: true
+              - name: hodnota
+                label: "Hodnota"
+                type: string
+                required: true
+          - name: parametr2
+            label: "2. parametr"
+            type: object
+            fields:
+              - name: nazev
+                label: "Název"
+                type: string
+                required: true
+              - name: hodnota
+                label: "Hodnota"
+                type: string
+                required: true
+          - name: parametr3
+            label: "3. parametr"
+            type: object
+            fields:
+              - name: nazev
+                label: "Název"
+                type: string
+                required: true
+              - name: hodnota
+                label: "Hodnota"
+                type: string
+                required: true
+          - name: tlacitko
+            label: "Tlačítko „Vzorník barev“"
+            type: string
+            required: true
+
+      - name: faq_sekce
+        label: "Časté dotazy – nadpis a úvod"
+        type: object
+        fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
+          - name: uvod_pred
+            label: "Úvodní věta – část před telefonem"
+            description: "Telefon se bere z Kontaktu (1. telefon)."
+            type: string
+            required: true
+          - name: uvod_za
+            label: "Úvodní věta – část za telefonem"
+            type: string
             required: true
 
       - name: faq
-        label: Časté dotazy (FAQ)
-        description: Otázky můžete přidávat, mazat i přesouvat. První otázka je na webu rozbalená.
+        label: "Časté dotazy – otázky a odpovědi"
+        description: "Otázky můžete přidávat, mazat i přesouvat. První otázka je na webu rozbalená."
         type: object
         list:
           collapsible:
@@ -152,11 +547,347 @@ content:
           - { name: otazka, label: Otázka, type: string, required: true }
           - { name: odpoved, label: Odpověď, type: text, required: true }
 
-      - name: kontakt
-        label: Kontakt
+      - name: poptavka
+        label: "Poptávkový formulář"
         type: object
         fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
           - name: uvod
-            label: Úvodní text sekce
+            label: "Úvodní text"
             type: text
+            required: true
+          - name: bod1
+            label: "1. odrážka"
+            type: string
+            required: true
+          - name: bod2
+            label: "2. odrážka"
+            type: string
+            required: true
+          - name: bod3
+            label: "3. odrážka (před telefonem)"
+            description: "Telefon se bere z Kontaktu (1. telefon – krátký tvar)."
+            type: string
+            required: true
+          - name: jmeno
+            label: "Pole „Jméno“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: email
+            label: "Pole „E-mail“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: telefon
+            label: "Pole „Telefon“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: pocet
+            label: "Pole „Počet kusů“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: typ_nadpis
+            label: "Otázka nad výběrem typu"
+            type: string
+            required: true
+          - name: typ1
+            label: "1. možnost"
+            description: "Stejný text se použije i v kartě „Nášivky“ (tlačítko předvybere tuto možnost)."
+            type: string
+            required: true
+          - name: typ2
+            label: "2. možnost"
+            description: "Stejný text se použije i v kartě „Výšivky“."
+            type: string
+            required: true
+          - name: typ3
+            label: "3. možnost"
+            description: "Stejný text se použije i v kartě „Reklamní textil“."
+            type: string
+            required: true
+          - name: typ4
+            label: "4. možnost"
+            type: string
+            required: true
+          - name: rozmer
+            label: "Pole „Rozměr“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: umisteni
+            label: "Pole „Umístění“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: material
+            label: "Pole „Materiál“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: termin
+            label: "Pole „Termín“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+          - name: vlastni_textil
+            label: "Zaškrtávací políčko „vlastní textil“"
+            type: string
+            required: true
+          - name: prilohy
+            label: "Popisek příloh"
+            type: string
+            required: true
+          - name: prilohy_info
+            label: "Info o povolených souborech"
+            description: "Povolené formáty a velikost hlídá web sám, změna textu je nezmění."
+            type: string
+            required: true
+          - name: nahrani_nadpis
+            label: "Pole pro nahrání – nadpis"
+            type: string
+            required: true
+          - name: nahrani_text
+            label: "Pole pro nahrání – text"
+            type: string
+            required: true
+          - name: zprava
+            label: "Pole „Zpráva“"
+            type: object
+            fields:
+              - name: popisek
+                label: "Popisek pole"
+                type: string
+                required: true
+              - name: napoveda
+                label: "Nápověda v poli (šedý text)"
+                type: string
+                required: true
+          - name: souhlas_pred
+            label: "Souhlas – text před odkazem"
+            type: string
+            required: true
+          - name: souhlas_odkaz
+            label: "Souhlas – text odkazu"
+            type: string
+            required: true
+          - name: souhlas_za
+            label: "Souhlas – text za odkazem"
+            type: string
+            required: true
+          - name: tlacitko
+            label: "Tlačítko pro odeslání"
+            type: string
+            required: true
+          - name: pod_tlacitkem
+            label: "Text pod tlačítkem"
+            type: string
+            required: true
+          - name: hotovo_nadpis
+            label: "Po odeslání – nadpis"
+            type: string
+            required: true
+          - name: hotovo_text
+            label: "Po odeslání – text"
+            type: text
+            required: true
+          - name: hotovo_tlacitko
+            label: "Po odeslání – tlačítko"
+            type: string
+            required: true
+
+      - name: kontakt
+        label: "Kontakt"
+        type: object
+        fields:
+          - name: stitek
+            label: "Štítek nad nadpisem"
+            type: string
+            required: true
+          - name: nadpis1
+            label: "Nadpis – 1. řádek"
+            type: string
+            required: true
+          - name: nadpis2
+            label: "Nadpis – 2. řádek"
+            type: string
+            required: true
+          - name: uvod
+            label: "Úvodní text sekce"
+            type: text
+            required: true
+          - name: telefon_nadpis
+            label: "Nadpis „Telefon“"
+            type: string
+            required: true
+          - name: telefon1
+            label: "1. telefon"
+            description: "Změní se všude na webu včetně odkazu pro volání."
+            type: string
+            required: true
+          - name: telefon1_kratky
+            label: "1. telefon – krátký tvar"
+            description: "Zobrazí se u formuláře (např. 734 395 056)."
+            type: string
+            required: true
+          - name: telefon2
+            label: "2. telefon"
+            description: "Změní se všude na webu včetně odkazu pro volání."
+            type: string
+            required: true
+          - name: email_nadpis
+            label: "Nadpis „E-mail“"
+            type: string
+            required: true
+          - name: email
+            label: "E-mail"
+            description: "Změní se všude na webu včetně odkazu."
+            type: string
+            required: true
+          - name: adresa_nadpis
+            label: "Nadpis „Adresa“"
+            type: string
+            required: true
+          - name: adresa_ulice
+            label: "Ulice a číslo"
+            description: "Podle ulice a města se nastaví i odkazy do Google Map."
+            type: string
+            required: true
+          - name: adresa_mesto
+            label: "PSČ a město"
+            type: string
+            required: true
+          - name: mapa_stitek
+            label: "Adresa na mapě (krátce)"
+            type: string
+            required: true
+          - name: navigovat
+            label: "Tlačítko „Navigovat“"
+            type: string
+            required: true
+          - name: doba_nadpis
+            label: "Nadpis „Otevírací doba“"
+            type: string
+            required: true
+          - name: doba
+            label: "Otevírací doba"
+            type: string
+            required: true
+          - name: doba_poznamka
+            label: "Poznámka k otevírací době"
+            type: string
+            required: true
+          - name: fakturace_nadpis
+            label: "Nadpis „Fakturační údaje“"
+            type: string
+            required: true
+          - name: firma
+            label: "Název firmy"
+            type: string
+            required: true
+          - name: ico_dic
+            label: "IČ a DIČ"
+            type: string
+            required: true
+
+      - name: paticka
+        label: "Patička"
+        type: object
+        fields:
+          - name: popis
+            label: "Text pod logem"
+            type: text
+            required: true
+          - name: menu_nadpis
+            label: "Nadpis „Menu“"
+            type: string
+            required: true
+          - name: kontakt_nadpis
+            label: "Nadpis „Kontakt“"
+            type: string
+            required: true
+          - name: adresa
+            label: "Adresa v patičce"
+            type: string
+            required: true
+          - name: sledujte
+            label: "Nadpis „Sledujte nás“"
+            type: string
+            required: true
+          - name: rozlouceni
+            label: "Velký text na konci"
+            type: string
+            required: true
+          - name: copyright
+            label: "Řádek s copyrightem"
+            type: string
+            required: true
+          - name: zasady
+            label: "Text „Zásady ochrany osobních údajů“"
+            type: string
             required: true
