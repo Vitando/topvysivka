@@ -49,10 +49,17 @@ assets/img/                fotka do úvodu, práce (Instagram), loga zákazník�
 Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.org) – bez znalosti HTML a bez GitHub účtu
 (je pozvaný e-mailem jako collaborator). Design ani rozložení stránky se z administrace změnit nedá.
 
-- **Kde jsou texty:** `content/texty.json`. Co se v administraci zobrazí a s jakými popisky, určuje `.pages.yml`.
+- **Kde jsou texty:** `content/texty.json`. Pole, popisky a limity se definují ve `scripts/admin-config.mjs`;
+  `node scripts/admin-config.mjs` z nich vygeneruje `.pages.yml` a `scripts/text-limits.json` (oba ručně neupravovat).
 - **Jak se dostanou na web:** uložení v administraci = commit `content/texty.json` → GitHub Action
   `.github/workflows/texts.yml` spustí `scripts/apply-texts.mjs`, ten přepíše texty v `index.html` a commitne je →
-  Vercel web nasadí. Trvá to zhruba 1–2 minuty.
+  Vercel web nasadí. Trvá to zhruba 1–2 minuty; pak stránku obnovit (Cmd+Shift+R).
+  Texty v sekci „Google a sdílení odkazu“ na stránce vidět nejsou (jen v Googlu a v náhledu odkazu).
+- **Blbuvzdornost:** každé pole má maximální délku (změřenou v prohlížeči na mobilu i desktopu) a telefony, e-mail
+  a čísla kontrolu formátu – Pages CMS delší / špatný text nedovolí uložit. Pojistka v `apply-texts.mjs`: text přes limit
+  se na web nepropíše (zůstane původní) a GitHub Actions ukáže varování. Velké nadpisy se při dlouhém slově samy
+  zmenší (`fitLines` v `main.js`). Texty se escapují, takže přes administraci nejde vložit kód.
+- **Když se něco pokazí:** každé uložení je commit na GitHubu, jakoukoli změnu jde vrátit (Revert).
 - **Značky v `index.html`:** každý upravitelný text je obalený `<!--t:klic-->text<!--/t-->` (klíč = cesta v JSON,
   např. `sluzby.nasivky.popis`). Stejný klíč může být na stránce víckrát (menu, telefony, běžící pásy).
   FAQ se generuje celé mezi `<!--faq:start-->` a `<!--faq:end-->`, `<title>` podle `seo.titulek`.

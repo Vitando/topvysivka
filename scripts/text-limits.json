@@ -1,0 +1,571 @@
+{
+  "seo.titulek": {
+    "max": 90
+  },
+  "seo.popis": {
+    "max": 200
+  },
+  "seo.sdileni_nadpis": {
+    "max": 90
+  },
+  "seo.sdileni_popis": {
+    "max": 200
+  },
+  "menu.logo": {
+    "max": 20
+  },
+  "menu.sluzby": {
+    "max": 10
+  },
+  "menu.jak": {
+    "max": 18
+  },
+  "menu.reference": {
+    "max": 13
+  },
+  "menu.faq": {
+    "max": 8
+  },
+  "menu.kontakt": {
+    "max": 11
+  },
+  "menu.tlacitko": {
+    "max": 20
+  },
+  "uvod.stitek": {
+    "max": 45
+  },
+  "uvod.podtitul": {
+    "max": 110
+  },
+  "uvod.nadpis1": {
+    "max": 10
+  },
+  "uvod.nadpis2": {
+    "max": 10
+  },
+  "uvod.nadpis3": {
+    "max": 30
+  },
+  "uvod.text": {
+    "max": 220
+  },
+  "uvod.tlacitko1": {
+    "max": 28
+  },
+  "uvod.tlacitko2": {
+    "max": 28
+  },
+  "uvod.poznamka": {
+    "max": 90
+  },
+  "uvod.foto_stitek": {
+    "max": 30
+  },
+  "pasky.horni1": {
+    "max": 30
+  },
+  "pasky.horni2": {
+    "max": 30
+  },
+  "pasky.horni3": {
+    "max": 30
+  },
+  "pasky.horni4": {
+    "max": 30
+  },
+  "pasky.dolni1": {
+    "max": 30
+  },
+  "pasky.dolni2": {
+    "max": 30
+  },
+  "pasky.dolni3": {
+    "max": 30
+  },
+  "pasky.dolni4": {
+    "max": 30
+  },
+  "zaruky.zaruka1.nadpis": {
+    "max": 40
+  },
+  "zaruky.zaruka1.text": {
+    "max": 140
+  },
+  "zaruky.zaruka2.nadpis": {
+    "max": 40
+  },
+  "zaruky.zaruka2.text": {
+    "max": 140
+  },
+  "zaruky.zaruka3.nadpis": {
+    "max": 40
+  },
+  "zaruky.zaruka3.text": {
+    "max": 140
+  },
+  "zaruky.zaruka4.nadpis": {
+    "max": 40
+  },
+  "zaruky.zaruka4.text": {
+    "max": 140
+  },
+  "sluzby.stitek": {
+    "max": 30
+  },
+  "sluzby.nadpis1": {
+    "max": 14
+  },
+  "sluzby.nadpis2": {
+    "max": 14
+  },
+  "sluzby.uvod": {
+    "max": 200
+  },
+  "sluzby.nasivky.nadpis": {
+    "max": 24
+  },
+  "sluzby.nasivky.popis": {
+    "max": 160
+  },
+  "sluzby.nasivky.hlaska": {
+    "max": 60
+  },
+  "sluzby.nasivky.tlacitko": {
+    "max": 28
+  },
+  "sluzby.vysivky.nadpis": {
+    "max": 24
+  },
+  "sluzby.vysivky.popis": {
+    "max": 160
+  },
+  "sluzby.vysivky.hlaska": {
+    "max": 60
+  },
+  "sluzby.vysivky.tlacitko": {
+    "max": 28
+  },
+  "sluzby.textil.nadpis": {
+    "max": 24
+  },
+  "sluzby.textil.popis": {
+    "max": 160
+  },
+  "sluzby.textil.hlaska": {
+    "max": 60
+  },
+  "sluzby.textil.tlacitko": {
+    "max": 28
+  },
+  "jak.stitek": {
+    "max": 30
+  },
+  "jak.nadpis1": {
+    "max": 14
+  },
+  "jak.nadpis2": {
+    "max": 14
+  },
+  "jak.uvod": {
+    "max": 200
+  },
+  "jak.krok1.nadpis": {
+    "max": 40
+  },
+  "jak.krok1.text": {
+    "max": 140
+  },
+  "jak.krok2.nadpis": {
+    "max": 40
+  },
+  "jak.krok2.text": {
+    "max": 140
+  },
+  "jak.krok3.nadpis": {
+    "max": 40
+  },
+  "jak.krok3.text": {
+    "max": 140
+  },
+  "jak.krok4.nadpis": {
+    "max": 40
+  },
+  "jak.krok4.text": {
+    "max": 140
+  },
+  "jak.bublina": {
+    "max": 28
+  },
+  "instagram.stitek": {
+    "max": 30
+  },
+  "instagram.nadpis1": {
+    "max": 12
+  },
+  "instagram.nadpis2": {
+    "max": 12
+  },
+  "instagram.uvod": {
+    "max": 200
+  },
+  "instagram.tlacitko": {
+    "max": 28
+  },
+  "reference.stitek": {
+    "max": 30
+  },
+  "reference.nadpis": {
+    "max": 30
+  },
+  "reference.seznam": {
+    "max": 400
+  },
+  "technika.stitek": {
+    "max": 30
+  },
+  "technika.nadpis1": {
+    "max": 14
+  },
+  "technika.nadpis2": {
+    "max": 14
+  },
+  "technika.uvod": {
+    "max": 200
+  },
+  "technika.civky": {
+    "max": 50
+  },
+  "technika.stroj": {
+    "max": 10
+  },
+  "technika.stroj_popis": {
+    "max": 30
+  },
+  "technika.plocha_sirka": {
+    "max": 5,
+    "pattern": "^[0-9]{1,5}$"
+  },
+  "technika.plocha_vyska": {
+    "max": 5,
+    "pattern": "^[0-9]{1,5}$"
+  },
+  "technika.plocha_popis": {
+    "max": 30
+  },
+  "technika.barvy": {
+    "max": 5,
+    "pattern": "^[0-9]{1,5}$"
+  },
+  "technika.barvy_popis": {
+    "max": 30
+  },
+  "technika.rychlost": {
+    "max": 5,
+    "pattern": "^[0-9]{1,5}$"
+  },
+  "technika.rychlost_popis": {
+    "max": 30
+  },
+  "technika.parametr1.nazev": {
+    "max": 28
+  },
+  "technika.parametr1.hodnota": {
+    "max": 28
+  },
+  "technika.parametr2.nazev": {
+    "max": 28
+  },
+  "technika.parametr2.hodnota": {
+    "max": 28
+  },
+  "technika.parametr3.nazev": {
+    "max": 28
+  },
+  "technika.parametr3.hodnota": {
+    "max": 28
+  },
+  "faq_sekce.stitek": {
+    "max": 30
+  },
+  "faq_sekce.nadpis1": {
+    "max": 14
+  },
+  "faq_sekce.nadpis2": {
+    "max": 14
+  },
+  "faq_sekce.uvod_pred": {
+    "max": 60
+  },
+  "faq_sekce.uvod_za": {
+    "max": 60
+  },
+  "poptavka.stitek": {
+    "max": 30
+  },
+  "poptavka.nadpis1": {
+    "max": 14
+  },
+  "poptavka.nadpis2": {
+    "max": 14
+  },
+  "poptavka.uvod": {
+    "max": 200
+  },
+  "poptavka.bod1": {
+    "max": 40
+  },
+  "poptavka.bod2": {
+    "max": 40
+  },
+  "poptavka.bod3": {
+    "max": 25
+  },
+  "poptavka.jmeno.popisek": {
+    "max": 28
+  },
+  "poptavka.jmeno.napoveda": {
+    "max": 45
+  },
+  "poptavka.email.popisek": {
+    "max": 28
+  },
+  "poptavka.email.napoveda": {
+    "max": 45
+  },
+  "poptavka.telefon.popisek": {
+    "max": 28
+  },
+  "poptavka.telefon.napoveda": {
+    "max": 45
+  },
+  "poptavka.pocet.popisek": {
+    "max": 28
+  },
+  "poptavka.pocet.napoveda": {
+    "max": 45
+  },
+  "poptavka.typ_nadpis": {
+    "max": 40
+  },
+  "poptavka.typ1": {
+    "max": 18
+  },
+  "poptavka.typ2": {
+    "max": 18
+  },
+  "poptavka.typ3": {
+    "max": 18
+  },
+  "poptavka.typ4": {
+    "max": 18
+  },
+  "poptavka.rozmer.popisek": {
+    "max": 28
+  },
+  "poptavka.rozmer.napoveda": {
+    "max": 45
+  },
+  "poptavka.umisteni.popisek": {
+    "max": 28
+  },
+  "poptavka.umisteni.napoveda": {
+    "max": 45
+  },
+  "poptavka.material.popisek": {
+    "max": 28
+  },
+  "poptavka.material.napoveda": {
+    "max": 45
+  },
+  "poptavka.termin.popisek": {
+    "max": 28
+  },
+  "poptavka.vlastni_textil": {
+    "max": 60
+  },
+  "poptavka.prilohy": {
+    "max": 20
+  },
+  "poptavka.prilohy_info": {
+    "max": 70
+  },
+  "poptavka.nahrani_nadpis": {
+    "max": 50
+  },
+  "poptavka.nahrani_text": {
+    "max": 90
+  },
+  "poptavka.zprava.popisek": {
+    "max": 40
+  },
+  "poptavka.zprava.napoveda": {
+    "max": 80
+  },
+  "poptavka.souhlas_pred": {
+    "max": 40
+  },
+  "poptavka.souhlas_odkaz": {
+    "max": 40
+  },
+  "poptavka.souhlas_za": {
+    "max": 40
+  },
+  "poptavka.tlacitko": {
+    "max": 28
+  },
+  "poptavka.pod_tlacitkem": {
+    "max": 70
+  },
+  "poptavka.hotovo_nadpis": {
+    "max": 40
+  },
+  "poptavka.hotovo_text": {
+    "max": 160
+  },
+  "poptavka.hotovo_tlacitko": {
+    "max": 28
+  },
+  "kontakt.stitek": {
+    "max": 30
+  },
+  "kontakt.nadpis1": {
+    "max": 14
+  },
+  "kontakt.nadpis2": {
+    "max": 14
+  },
+  "kontakt.uvod": {
+    "max": 200
+  },
+  "kontakt.telefon_nadpis": {
+    "max": 30
+  },
+  "kontakt.telefon1": {
+    "max": 17,
+    "pattern": "^\\+?[0-9 ]{9,17}$"
+  },
+  "kontakt.telefon1_kratky": {
+    "max": 12,
+    "pattern": "^[0-9 ]{9,12}$"
+  },
+  "kontakt.telefon2": {
+    "max": 17,
+    "pattern": "^\\+?[0-9 ]{9,17}$"
+  },
+  "kontakt.email_nadpis": {
+    "max": 30
+  },
+  "kontakt.email": {
+    "max": 40,
+    "pattern": "^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}$"
+  },
+  "kontakt.adresa_nadpis": {
+    "max": 30
+  },
+  "kontakt.adresa_ulice": {
+    "max": 30
+  },
+  "kontakt.adresa_mesto": {
+    "max": 40
+  },
+  "kontakt.mapa_stitek": {
+    "max": 40
+  },
+  "kontakt.navigovat": {
+    "max": 20
+  },
+  "kontakt.doba_nadpis": {
+    "max": 30
+  },
+  "kontakt.doba": {
+    "max": 20
+  },
+  "kontakt.doba_poznamka": {
+    "max": 40
+  },
+  "kontakt.fakturace_nadpis": {
+    "max": 30
+  },
+  "kontakt.firma": {
+    "max": 50
+  },
+  "kontakt.ico_dic": {
+    "max": 50
+  },
+  "paticka.popis": {
+    "max": 140
+  },
+  "paticka.menu_nadpis": {
+    "max": 16
+  },
+  "paticka.kontakt_nadpis": {
+    "max": 16
+  },
+  "paticka.adresa": {
+    "max": 50
+  },
+  "paticka.sledujte": {
+    "max": 16
+  },
+  "paticka.rozlouceni": {
+    "max": 14
+  },
+  "paticka.copyright": {
+    "max": 90
+  },
+  "paticka.zasady": {
+    "max": 40
+  },
+  "paticka.cookies": {
+    "max": 25
+  },
+  "cookies.nadpis": {
+    "max": 40
+  },
+  "cookies.text": {
+    "max": 300
+  },
+  "cookies.odkaz": {
+    "max": 25
+  },
+  "cookies.odmitnout": {
+    "max": 16
+  },
+  "cookies.prijmout": {
+    "max": 16
+  },
+  "cookies.nastaveni": {
+    "max": 20
+  },
+  "cookies.ulozit": {
+    "max": 20
+  },
+  "cookies.nezbytne_nazev": {
+    "max": 20
+  },
+  "cookies.nezbytne_popis": {
+    "max": 160
+  },
+  "cookies.analyticke_nazev": {
+    "max": 20
+  },
+  "cookies.analyticke_popis": {
+    "max": 160
+  },
+  "cookies.marketingove_nazev": {
+    "max": 20
+  },
+  "cookies.marketingove_popis": {
+    "max": 160
+  },
+  "faq[].otazka": {
+    "max": 90
+  },
+  "faq[].odpoved": {
+    "max": 400
+  },
+  "faq[]": {
+    "max": 15
+  }
+}

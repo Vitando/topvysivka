@@ -36,11 +36,25 @@ const textOf = (v) => {
 
 const lookup = (data, key) => key.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), data);
 
+// Pojistka: text delší než limit nebo ve špatném formátu se nepropíše (na webu zůstane původní).
+// Limity generuje scripts/admin-config.mjs (stejné hlídá i Pages CMS při psaní).
+const LIMITS = JSON.parse(await readFile(path.join(ROOT, 'scripts', 'text-limits.json'), 'utf8'));
+const rejected = [];
+function allowed(key, t) {
+  if (t === null) return null;
+  const lim = LIMITS[key.replace(/^faq\[\d+\]/, 'faq[]')];
+  if (!lim) return t;
+  if ([...t].length > lim.max) { rejected.push(`${key}: ${[...t].length} znaků, max. ${lim.max}`); return null; }
+  if (lim.pattern && !new RegExp(lim.pattern).test(t)) { rejected.push(`${key}: špatný formát („${t}“)`); return null; }
+  return t;
+}
+const textAt = (data, key) => allowed(key, textOf(lookup(data, key)));
+
 // Hodnota atributu podle zdroje z data-t, nebo null (atribut zůstane, jak je)
 function attrValue(data, src) {
   if (src === '@mapa' || src === '@trasa') {
-    const ulice = textOf(lookup(data, 'kontakt.adresa_ulice'));
-    const mesto = textOf(lookup(data, 'kontakt.adresa_mesto'));
+    const ulice = textAt(data, 'kontakt.adresa_ulice');
+    const mesto = textAt(data, 'kontakt.adresa_mesto');
     if (!ulice || !mesto) return null;
     const adresa = `${ulice}, ${mesto}`;
     return src === '@mapa'
@@ -48,7 +62,7 @@ function attrValue(data, src) {
       : 'https://www.google.com/maps/dir/?api=1&' + new URLSearchParams({ destination: adresa });
   }
   const m = src.match(/^(tel:|mailto:)?(.+)$/);
-  const v = textOf(lookup(data, m[2]));
+  const v = textAt(data, m[2]);
   if (v === null) return null;
   if (m[1] === 'tel:') return 'tel:' + v.replace(/[^\d+]/g, '');
   if (m[1] === 'mailto:') return 'mailto:' + v;
@@ -70,7 +84,7 @@ async function main() {
   const missing = [];
 
   let next = html.replace(/<!--t:([\w.-]+)-->([\s\S]*?)<!--\/t-->/g, (whole, key) => {
-    const t = textOf(lookup(data, key));
+    const t = textAt(data, key);
     if (t === null) { missing.push(key); return whole; }
     return `<!--t:${key}-->${esc(t)}<!--/t-->`;
   });
@@ -85,7 +99,7 @@ async function main() {
     return tag;
   });
 
-  const title = textOf(lookup(data, 'seo.titulek'));
+  const title = textAt(data, 'seo.titulek');
   if (title === null) missing.push('seo.titulek');
   else next = next.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
 
@@ -94,7 +108,8 @@ async function main() {
     const b = next.indexOf(FAQ_END);
     if (a < 0 || b < a) throw new Error('v index.html chybí značky faq:start / faq:end');
     const items = data.faq
-      .map((x) => [textOf(x && x.otazka), textOf(x && x.odpoved)])
+      .slice(0, LIMITS['faq[]'].max)
+      .map((x, i) => [allowed(`faq[${i}].otazka`, textOf(x && x.otazka)), allowed(`faq[${i}].odpoved`, textOf(x && x.odpoved))])
       .filter(([q, ans]) => q && ans)
       .map(([q, ans], i) => '          ' + faqItem(q, ans, i));
     if (items.length) {
@@ -106,7 +121,11 @@ async function main() {
     missing.push('faq');
   }
 
-  if (missing.length) console.log(`Beze změny (chybí v texty.json): ${missing.join(', ')}`);
+  const rejectedKeys = new Set(rejected.map((r) => r.split(':')[0]));
+  const absent = [...new Set(missing)].filter((k) => !rejectedKeys.has(k.replace(/^(tel|mailto):/, '')));
+  if (absent.length) console.log(`Beze změny (chybí v texty.json): ${absent.join(', ')}`);
+  // GitHub Actions ukáže varování u běhu workflow; text na webu zůstane původní
+  for (const r of new Set(rejected)) console.log(`::warning title=Text z administrace se nepropsal::${r}`);
 
   if (next !== html) {
     await writeFile(HTML_PATH, next);

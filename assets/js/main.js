@@ -27,7 +27,7 @@ class TopVysivka extends Base {
       const t = setTimeout(() => ready(test, cb, n + 1), 60);
       this._clean.push(() => clearTimeout(t));
     };
-    ready(() => !!this.root, () => this.fitTitle());
+    ready(() => !!this.root, () => { this.fitTitle(); this.fitLines(); });
     ready(() => this.root && window.gsap && window.ScrollTrigger, () => this.initMotion());
     ready(() => this.root && window.THREE && window.gsap, () => this.initThree());
   }
@@ -40,6 +40,34 @@ class TopVysivka extends Base {
   componentDidUpdate(prevProps, prevState) {
     const was = prevState && prevState.sent;
     if (this.state && this.state.sent && !was) this.celebrate();
+  }
+
+  /* velké nadpisy sekcí: když se dlouhé slovo (třeba z administrace) nevejde na šířku, zmenší se písmo */
+  fitLines() {
+    const hs = Array.prototype.slice.call(this.root.querySelectorAll('[data-lines]:not([data-fit])'));
+    if (!hs.length) return;
+    const run = () => {
+      if (!this._alive) return;
+      hs.forEach((h) => {
+        h.style.fontSize = '';
+        for (let i = 0; i < 4; i++) {
+          let k = 1;
+          // přesah do ~4 % velikosti písma dělá tvar písmen (neviditelné); zmenšuje se až skutečně přetékající slovo
+          const tol = parseFloat(getComputedStyle(h).fontSize) * 0.08;
+          h.querySelectorAll('.tv-line').forEach((l) => {
+            if (l.clientWidth && l.scrollWidth - l.clientWidth > tol) k = Math.min(k, l.clientWidth / l.scrollWidth);
+          });
+          if (k >= 1) break;
+          h.style.fontSize = parseFloat(getComputedStyle(h).fontSize) * k * 0.96 + 'px';
+        }
+      });
+    };
+    run();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    let raf = 0;
+    const onResize = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(run); };
+    window.addEventListener('resize', onResize);
+    this._clean.push(() => window.removeEventListener('resize', onResize));
   }
 
   /* nadpis v hero přes celou šířku */
