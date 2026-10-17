@@ -3,6 +3,9 @@
 // Stáhne poslední příspěvky z Behold.so JSON feedu, uloží fotky do
 // assets/img/instagram/ a přepíše galerii v index.html mezi značkami
 // <!-- INSTAGRAM:START --> a <!-- INSTAGRAM:END -->.
+// Galerie drží 9 nejnovějších příspěvků (mřížka 3×3). Už stažené příspěvky si pamatuje
+// v assets/img/instagram/posts.json, takže nový post se přidá nahoru a nejstarší vypadne,
+// i když feed vrací méně než 9 příspěvků.
 // Když cokoliv selže, index.html zůstane beze změny (web dál ukazuje poslední fotky).
 //
 // Spuštění ručně:  node scripts/sync-instagram.mjs
@@ -14,12 +17,14 @@ import { fileURLToPath } from 'node:url';
 
 const FEED_URL = process.env.BEHOLD_FEED_URL || 'https://feeds.behold.so/PP8w0EJWDQ0HDUtMJgjM';
 const PROFILE_URL = process.env.INSTAGRAM_PROFILE_URL || 'https://www.instagram.com/topvysivka.cz/';
-const MAX_POSTS = 6;
+const MAX_POSTS = 9;
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HTML_PATH = path.join(ROOT, 'index.html');
 const IMG_DIR_REL = 'assets/img/instagram';
 const IMG_DIR = path.join(ROOT, IMG_DIR_REL);
+const STORE_FILE = 'posts.json';
+const STORE_PATH = path.join(IMG_DIR, STORE_FILE);
 const START = '<!-- INSTAGRAM:START -->';
 const END = '<!-- INSTAGRAM:END -->';
 
@@ -71,27 +76,53 @@ async function main() {
   const res = await fetch(FEED_URL, { signal: AbortSignal.timeout(20000), headers: { accept: 'application/json' } });
   if (!res.ok) throw new Error(`feed vrátil HTTP ${res.status}`);
   const data = await res.json();
-  const posts = (Array.isArray(data) ? data : data.posts || []).slice(0, MAX_POSTS);
-  if (!posts.length) throw new Error('feed neobsahuje žádné příspěvky');
+  const feedPosts = Array.isArray(data) ? data : data.posts || [];
+  if (!feedPosts.length) throw new Error('feed neobsahuje žádné příspěvky');
+  const username = Array.isArray(data) ? '' : data.username || '';
 
   await mkdir(IMG_DIR, { recursive: true });
   const existing = await readdir(IMG_DIR);
-  const used = new Set();
+
+  // Dřív uložené příspěvky; při změně napojeného účtu se začíná znovu
+  let stored = [];
+  try {
+    const saved = JSON.parse(await readFile(STORE_PATH, 'utf8'));
+    if ((saved.username || '') === username && Array.isArray(saved.posts)) stored = saved.posts;
+  } catch {}
+
+  // Příspěvky z feedu mají přednost (aktuální popisek), zbytek doplní uložené
+  const byId = new Map(stored.map((p) => [p.id, p]));
+  for (const post of feedPosts) {
+    const img = pickImage(post);
+    const id = String(post.id || '').replace(/[^\w-]/g, '');
+    if (!img || !id) continue;
+    byId.set(id, {
+      id,
+      permalink: post.permalink || '',
+      timestamp: post.timestamp || '',
+      caption: post.caption || post.prunedCaption || '',
+      width: img.width,
+      height: img.height,
+      url: img.url,
+    });
+  }
+  const posts = [...byId.values()]
+    .sort((x, y) => String(y.timestamp).localeCompare(String(x.timestamp)))
+    .slice(0, MAX_POSTS);
+
+  const used = new Set([STORE_FILE]);
+  const keep = [];
   const cards = [];
 
   for (const post of posts) {
-    const img = pickImage(post);
-    if (!img) continue;
-    const id = String(post.id || '').replace(/[^\w-]/g, '');
-    if (!id) continue;
-    const file = existing.find((f) => f.startsWith(id + '.')) || (await download(img.url, id));
+    const file = existing.find((f) => f.startsWith(post.id + '.')) || (await download(post.url, post.id));
     used.add(file);
-    const raw = post.caption || post.prunedCaption || '';
+    keep.push({ ...post, file });
     const i = cards.length;
     cards.push(
       `<a class="tv-polaroid" href="${esc(post.permalink || PROFILE_URL)}" target="_blank" rel="noopener">` +
-      `<span class="tv-polaroid__img tv-polaroid__img--${i % 4}"><img src="${IMG_DIR_REL}/${file}" alt="${esc(altFrom(raw))}" loading="lazy" width="${img.width}" height="${img.height}"></span>` +
-      `<span class="tv-polaroid__cap"><span>${esc(titleFrom(raw))}</span>${IG_ICON}</span></a>`
+      `<span class="tv-polaroid__img tv-polaroid__img--${i % 4}"><img src="${IMG_DIR_REL}/${file}" alt="${esc(altFrom(post.caption))}" loading="lazy" width="${post.width}" height="${post.height}"></span>` +
+      `<span class="tv-polaroid__cap"><span>${esc(titleFrom(post.caption))}</span>${IG_ICON}</span></a>`
     );
   }
   if (!cards.length) throw new Error('žádný příspěvek nemá použitelný obrázek');
@@ -109,6 +140,7 @@ async function main() {
   } else {
     console.log('Žádné nové příspěvky.');
   }
+  await writeFile(STORE_PATH, JSON.stringify({ username, posts: keep }, null, 2) + '\n');
 
   // Smaže staré fotky, které už v galerii nejsou
   for (const f of await readdir(IMG_DIR)) {

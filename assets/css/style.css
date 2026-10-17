@@ -370,6 +370,7 @@ textarea.tv-input{min-height:136px;resize:vertical}
   .tv-patches{grid-template-columns:1fr;max-width:540px;margin:0 auto;gap:44px}
   .tv-patch:nth-child(2){transform:rotate(1.6deg)}
   .tv-ig__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tv-polaroid:nth-child(n+9){display:none}
   .tv-tech,.tv-faq,.tv-formgrid,.tv-contact{grid-template-columns:1fr}
   .tv-faq__side{position:static}
   .tv-form__mascot{width:150px;margin-top:28px}
