@@ -504,10 +504,6 @@ content:
                 label: "Hodnota"
                 type: string
                 required: true
-          - name: tlacitko
-            label: "Tlačítko „Vzorník barev“"
-            type: string
-            required: true
 
       - name: faq_sekce
         label: "Časté dotazy – nadpis a úvod"
@@ -890,4 +886,67 @@ content:
           - name: zasady
             label: "Text „Zásady ochrany osobních údajů“"
             type: string
+            required: true
+          - name: cookies
+            label: "Text „Nastavení cookies“"
+            description: "Odkaz je vidět jen tehdy, když web používá měření (Google Analytics / Meta Pixel)."
+            type: string
+            required: true
+
+      - name: cookies
+        label: "Cookie lišta"
+        description: "Lišta se ukáže jen tehdy, když web používá měření. Odmítnutí musí zůstat stejně snadné jako přijetí."
+        type: object
+        fields:
+          - name: nadpis
+            label: "Nadpis"
+            type: string
+            required: true
+          - name: text
+            label: "Text"
+            type: text
+            required: true
+          - name: odkaz
+            label: "Odkaz na zásady"
+            type: string
+            required: true
+          - name: odmitnout
+            label: "Tlačítko „Odmítnout vše“"
+            type: string
+            required: true
+          - name: prijmout
+            label: "Tlačítko „Přijmout vše“"
+            type: string
+            required: true
+          - name: nastaveni
+            label: "Odkaz „Nastavení“"
+            type: string
+            required: true
+          - name: ulozit
+            label: "Tlačítko „Uložit výběr“"
+            type: string
+            required: true
+          - name: nezbytne_nazev
+            label: "Nezbytné – název"
+            type: string
+            required: true
+          - name: nezbytne_popis
+            label: "Nezbytné – popis"
+            type: text
+            required: true
+          - name: analyticke_nazev
+            label: "Analytické – název"
+            type: string
+            required: true
+          - name: analyticke_popis
+            label: "Analytické – popis"
+            type: text
+            required: true
+          - name: marketingove_nazev
+            label: "Marketingové – název"
+            type: string
+            required: true
+          - name: marketingove_popis
+            label: "Marketingové – popis"
+            type: text
             required: true

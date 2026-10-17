@@ -613,7 +613,7 @@ class TopVysivka extends Base {
     /* tlačítka u služeb předvyplní typ zakázky */
     root.querySelectorAll('[data-pick]').forEach(function (a) {
       a.addEventListener('click', function () {
-        var r = root.querySelector('input[name="typ"][value="' + a.getAttribute('data-pick') + '"]');
+        var r = root.querySelector('input[name="typ"][value="' + CSS.escape(a.getAttribute('data-pick')) + '"]');
         if (r) r.checked = true;
       });
     });

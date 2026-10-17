@@ -1,0 +1,6 @@
+# Na web patří jen stránky a assets; zbytek repozitáře se nenasazuje
+README.md
+.pages.yml
+.github
+content
+scripts

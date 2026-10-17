@@ -139,8 +139,7 @@
     "parametr3": {
       "nazev": "Povrch",
       "hodnota": "Hedvábný lesk"
-    },
-    "tlacitko": "Vzorník barev"
+    }
   },
   "faq_sekce": {
     "stitek": "FAQ",
@@ -276,6 +275,22 @@
     "sledujte": "Sledujte nás",
     "rozlouceni": "Ať to drží!",
     "copyright": "© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258",
-    "zasady": "Zásady ochrany osobních údajů"
+    "zasady": "Zásady ochrany osobních údajů",
+    "cookies": "Nastavení cookies"
+  },
+  "cookies": {
+    "nadpis": "Můžeme použít cookies?",
+    "text": "Nezbytné cookies potřebujeme, aby web fungoval. Ostatní zapneme jen s vaším souhlasem a pomůžou nám zjistit, co na webu funguje.",
+    "odkaz": "Více informací",
+    "odmitnout": "Odmítnout vše",
+    "prijmout": "Přijmout vše",
+    "nastaveni": "Nastavení",
+    "ulozit": "Uložit výběr",
+    "nezbytne_nazev": "Nezbytné",
+    "nezbytne_popis": "Zajišťují základní funkce webu a zapamatování této volby. Jsou vždy zapnuté.",
+    "analyticke_nazev": "Analytické",
+    "analyticke_popis": "Statistiky návštěvnosti, díky kterým víme, co lidi na webu zajímá (Google Analytics).",
+    "marketingove_nazev": "Marketingové",
+    "marketingove_popis": "Měření a cílení reklam na sociálních sítích (Meta Pixel)."
   }
 }

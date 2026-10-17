@@ -7,9 +7,7 @@
 <meta name="description" content="Jak Top výšivka (Flavio company s.r.o.) zpracovává osobní údaje z poptávkového formuláře a objednávek.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F8D547">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Baloo+2:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
   body{margin:0;background:#FFF6E2}
@@ -92,14 +90,25 @@
     <p>Údaje mohou zpracovávat jen prověření dodavatelé, kteří nám pomáhají s provozem, a to pouze v nezbytném rozsahu:</p>
     <ul>
       <li>poskytovatel hostingu webu a služba pro odeslání formuláře,</li>
+      <li>Google a Meta, jen pokud povolíte analytické nebo marketingové cookies,</li>
       <li>poskytovatel e-mailových služeb,</li>
       <li>přepravní společnosti při doručení zásilky,</li>
       <li>účetní a daňový poradce.</li>
     </ul>
     <p style="margin-top:12px">Někteří technologičtí poskytovatelé mohou údaje zpracovávat i mimo Evropskou unii (např. v USA). V takovém případě se tak děje jen se zárukami podle GDPR, například na základě rozhodnutí Evropské komise o odpovídající ochraně (EU–US Data Privacy Framework) nebo standardních smluvních doložek.</p>
 
-    <h2>Cookies a služby třetích stran</h2>
-    <p>Web nepoužívá cookies pro sledování návštěvnosti ani pro reklamu. Písma stránky se načítají ze služby Google Fonts, při tom se společnosti Google předává IP adresa vašeho zařízení. Odkazy na Instagram, Facebook a Google Mapy vás přesměrují na tyto služby, které se řídí vlastními pravidly ochrany soukromí.</p>
+    <h2 id="cookies">Cookies a měření návštěvnosti</h2>
+    <p>Cookies jsou malé soubory, které si web ukládá do vašeho prohlížeče. Bez vašeho souhlasu používáme jen to, co je pro fungování webu nezbytné:</p>
+    <ul>
+      <li><strong>tv-consent</strong> (úložiště prohlížeče, platnost 6 měsíců) – pamatuje si, jak jste se rozhodli v cookie liště. Bez souhlasu, protože je technicky nezbytné.</li>
+    </ul>
+    <p style="margin-top:12px">Pokud web používá měření návštěvnosti nebo reklamy, zeptáme se vás nejdřív v cookie liště. Odmítnutí je stejně snadné jako přijetí. <strong>Dokud souhlas nedáte, žádné měřicí ani reklamní skripty se nenačtou a nic se neposílá třetím stranám.</strong> Podle toho, co povolíte, to mohou být:</p>
+    <ul>
+      <li><strong>Analytické – Google Analytics</strong> (Google Ireland Limited): cookies <code>_ga</code> a <code>_ga_*</code> s platností až 2 roky. Slouží ke statistikám návštěvnosti (kolik lidí web navštívilo, které stránky je zajímaly). Reklamní signály zůstávají vypnuté, pokud nepovolíte i marketingové cookies.</li>
+      <li><strong>Marketingové – Meta Pixel</strong> (Meta Platforms Ireland Limited): cookie <code>_fbp</code> s platností 3 měsíce. Slouží k měření a cílení reklam na Facebooku a Instagramu.</li>
+    </ul>
+    <p style="margin-top:12px">Právním základem je váš souhlas (§ 89 odst. 3 zákona č. 127/2005 Sb., o elektronických komunikacích, a čl. 6 odst. 1 písm. a) GDPR). Vaše volba platí 6 měsíců, pak se vás zeptáme znovu. Souhlas můžete kdykoli změnit nebo odvolat odkazem <a href="./#cookies">Nastavení cookies</a> v patičce webu. Po odvolání cookies měření smažeme. Cookies můžete smazat i v nastavení svého prohlížeče.</p>
+    <p style="margin-top:12px">Písma i obrázky webu načítáme z našeho serveru, ne od Googlu ani jiných služeb. Odkazy na Instagram, Facebook a Google Mapy vás přesměrují na tyto služby, které se řídí vlastními pravidly ochrany soukromí.</p>
 
     <h2>Vaše práva</h2>
     <p>V souvislosti se zpracováním osobních údajů máte právo:</p>
@@ -126,10 +135,11 @@
 
 <footer class="tv-footer" style="padding:34px 0">
   <div class="tv-wrap">
-    <div class="tv-legal" style="margin-top:0;padding-top:0;border-top:0"><span>© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258</span><a href="./">topvysivka.cz</a></div>
+    <div class="tv-legal" style="margin-top:0;padding-top:0;border-top:0"><span>© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258</span><span class="tv-legal__links"><a href="#cookies" data-cookie-settings hidden>Nastavení cookies</a><a href="./">topvysivka.cz</a></span></div>
   </div>
 </footer>
 
 </div>
+<script src="assets/js/consent.js" defer></script>
 </body>
 </html>

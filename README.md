@@ -16,6 +16,10 @@ index.html                 obsah celé stránky
 assets/css/style.css       veškerý vzhled (barvy v :root u .tv – proměnné --yellow, --pink, --sky, --mint, --ink…)
 assets/js/main.js          animace (GSAP), 3D nášivka a cívky (Three.js), nit při scrollu, menu, FAQ, formulář
 assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158
+assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
+assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
+zasady.html                zásady ochrany osobních údajů
+vercel.json                bezpečnostní hlavičky (CSP, HSTS…)
 assets/img/                fotka do úvodu, práce (Instagram), loga zákazníků
 ```
 
@@ -25,7 +29,7 @@ assets/img/                fotka do úvodu, práce (Instagram), loga zákazník�
    (např. Formspree `https://formspree.io/f/…` nebo vlastní PHP skript). Bez něj formulář jen ukáže poděkování.
    Formulář posílá: jmeno, email, telefon, pocet, typ, rozmer, umisteni, material, termin, vlastni_textil, prilohy[], zprava, souhlas.
    Pole `web` je skrytá past na spamboty – na serveru zahodit zprávy, kde je vyplněné.
-2. **Odkazy označené [DOPLNIT]** v `index.html`: vzorník barev. Zásady ochrany osobních údajů jsou v `zasady.html` (text nechat zkontrolovat klientem).
+2. **Zásady ochrany osobních údajů** jsou v `zasady.html` (text nechat zkontrolovat klientem).
 3. **Instagram** – galerie (mřížka 3×3, 9 posledních příspěvků) se plní automaticky z Behold.so feedu.
    - Stažené příspěvky si pamatuje v `assets/img/instagram/posts.json`: nový post se přidá nahoru, nejstarší vypadne.
      Na mobilu (2 sloupce) se ukazuje 8 fotek.
@@ -66,6 +70,22 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
 - Ručně: `node scripts/apply-texts.mjs` (když se nic nezměnilo, `index.html` nepřepíše).
 - `texts.yml` i `instagram.yml` sdílí `concurrency: site-content` a před pushem dělají `git pull --rebase`,
   takže se navzájem nepřepisují.
+
+## Bezpečnost a cookies
+
+- **Bez souhlasu se nic nesleduje.** Web sám neukládá žádné cookies a nenačítá nic z cizích serverů
+  (písma, obrázky i knihovny jsou u nás). Jediné, co si pamatuje, je volba z cookie lišty (`localStorage`, `tv-consent`).
+- **Měření zapnout:** v `assets/js/consent.js` nahoře vyplnit `GA4_ID` (Google Analytics 4) a/nebo `META_PIXEL_ID`.
+  Teprve pak se ukáže cookie lišta a odkaz „Nastavení cookies“ v patičce. Skripty se načtou až po souhlasu
+  (Google Consent Mode v2, základní režim), po odvolání se cookies měření smažou.
+- **Pravidla lišty** (§ 89 zákona č. 127/2005 Sb., GDPR, doporučení ÚOOÚ a EDPB): odmítnutí je stejně snadné jako přijetí
+  (stejná tlačítka v první vrstvě), nic není předem zaškrtnuté, volba platí 6 měsíců, souhlas jde kdykoli změnit.
+  Přidání dalšího nástroje = zvýšit `CONSENT_VERSION`, doplnit ho do lišty a do `zasady.html`.
+- **Bezpečnostní hlavičky** jsou ve `vercel.json` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
+  Permissions-Policy, nosniff). CSP povoluje jen náš web, Google Analytics, Meta Pixel a služby formuláře
+  Formspree / Web3Forms. **Jiná služba pro formulář nebo jiný měřicí nástroj = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
+- `.vercelignore` nenasazuje na web README, administraci, skripty ani `content/`.
+- Texty z administrace se do HTML vkládají escapované, takže přes ně nejde vložit kód.
 
 ## Poznámky
 
