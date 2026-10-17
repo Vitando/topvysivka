@@ -203,20 +203,6 @@ class TopVysivka extends Base {
           card.addEventListener('pointermove', mv); card.addEventListener('pointerleave', lv);
           this._clean.push(() => { card.removeEventListener('pointermove', mv); card.removeEventListener('pointerleave', lv); });
         });
-        const cur = q('.tv-cursor')[0];
-        if (cur) {
-          const cx = gsap.quickTo(cur, 'x', { duration: 0.35, ease: 'power3' });
-          const cy = gsap.quickTo(cur, 'y', { duration: 0.35, ease: 'power3' });
-          let shown = false;
-          const mv = (e) => {
-            cx(e.clientX); cy(e.clientY);
-            if (!shown) { shown = true; gsap.to(cur, { opacity: 1, duration: 0.3 }); }
-            const hot = e.target && e.target.closest && e.target.closest('a, button, label, input, textarea, [data-tilt]');
-            if (hot !== this._hot) { this._hot = hot; gsap.to(cur, { scale: hot ? 2.4 : 1, backgroundColor: hot ? '#F8D547' : '#F5A8D3', duration: 0.35, ease: 'back.out(2)' }); }
-          };
-          window.addEventListener('pointermove', mv);
-          this._clean.push(() => window.removeEventListener('pointermove', mv));
-        }
         const pupils = q('.tv-pupils').map((p) => ({ el: p, x: gsap.quickTo(p, 'x', { duration: 0.4 }), y: gsap.quickTo(p, 'y', { duration: 0.4 }) }));
         const look = (e) => {
           pupils.forEach((p) => {
@@ -380,7 +366,7 @@ class TopVysivka extends Base {
     ctx.strokeStyle = bump ? '#ffffff' : '#3B2418'; ctx.beginPath(); ctx.arc(c, c, rPx * 0.83, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
     const spark = (m, x, y, s) => { m.beginPath(); m.moveTo(x, y - s); m.bezierCurveTo(x + s * 0.12, y - s * 0.25, x + s * 0.25, y - s * 0.12, x + s, y); m.bezierCurveTo(x + s * 0.25, y + s * 0.12, x + s * 0.12, y + s * 0.25, x, y + s); m.bezierCurveTo(x - s * 0.12, y + s * 0.25, x - s * 0.25, y + s * 0.12, x - s, y); m.bezierCurveTo(x - s * 0.25, y - s * 0.12, x - s * 0.12, y - s * 0.25, x, y - s); m.closePath(); m.fill(); };
     this.satin(ctx, S, (m) => { m.textAlign = 'center'; m.textBaseline = 'alphabetic'; m.font = '400 ' + Math.round(rPx * 0.74) + 'px Anton, Impact, sans-serif'; m.fillText('TOP', c, c + rPx * 0.17); }, bump ? ['#ffffff', '#a8a8a8'] : ['#F9BEDD', '#DE7DB0'], 1.15, bump);
-    this.satin(ctx, S, (m) => { m.textAlign = 'center'; m.textBaseline = 'alphabetic'; m.font = '700 ' + Math.round(rPx * 0.27) + 'px Fredoka, sans-serif'; m.fillText('výšivka', c, c + rPx * 0.5); }, bump ? ['#ffffff', '#b4b4b4'] : ['#FFF6E2', '#E8D3AE'], -1.1, bump);
+    this.satin(ctx, S, (m) => { m.textAlign = 'center'; m.textBaseline = 'alphabetic'; m.font = '700 ' + Math.round(rPx * 0.27) + 'px "Baloo 2", sans-serif'; m.fillText('výšivka', c, c + rPx * 0.5); }, bump ? ['#ffffff', '#b4b4b4'] : ['#FFF6E2', '#E8D3AE'], -1.1, bump);
     this.satin(ctx, S, (m) => { spark(m, c - rPx * 0.56, c - rPx * 0.4, rPx * 0.13); spark(m, c + rPx * 0.57, c - rPx * 0.36, rPx * 0.09); }, bump ? ['#ffffff', '#b8b8b8'] : ['#F8D547', '#D8B21C'], 0.6, bump);
   }
 
@@ -425,7 +411,7 @@ class TopVysivka extends Base {
     const paint = () => { this.paintPatch(colC.getContext('2d'), S, rPx, false); this.paintPatch(bumpC.getContext('2d'), S, rPx, true); map.needsUpdate = true; bmap.needsUpdate = true; };
     paint();
     if (document.fonts && document.fonts.load) {
-      Promise.all([document.fonts.load('400 100px Anton'), document.fonts.load('700 100px Fredoka')]).then(() => { if (this._alive) paint(); }).catch(() => {});
+      Promise.all([document.fonts.load('400 100px Anton'), document.fonts.load('700 100px "Baloo 2"')]).then(() => { if (this._alive) paint(); }).catch(() => {});
     }
     const capMat = toon({ map, bumpMap: bmap, bumpScale: 1.4 });
     const sideMat = toon({ color: '#5E8FD6' });

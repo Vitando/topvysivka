@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#F8D547">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Fredoka:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Baloo+2:wght@500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>body{margin:0;background:#FFF6E2}</style>
 </head>
@@ -512,7 +512,7 @@
               </div>
               <div class="tv-field tv-field--full"><label class="tv-lbl" for="tv-f-msg"><!--t:poptavka.zprava.popisek-->Zpráva<!--/t--></label><textarea class="tv-input" id="tv-f-msg" name="zprava" rows="5" data-t="placeholder=poptavka.zprava.napoveda" placeholder="Popište, co si představujete. Klidně vlastními slovy."></textarea></div>
               <div class="tv-hp" aria-hidden="true"><label for="tv-f-web">Toto pole nevyplňujte</label><input id="tv-f-web" name="web" type="text" tabindex="-1" autocomplete="off"></div>
-              <div class="tv-field tv-field--full"><label class="tv-check"><input type="checkbox" name="souhlas" required><span><!--t:poptavka.souhlas_pred-->Souhlasím se<!--/t--> <a href="#"><!--t:poptavka.souhlas_odkaz-->zpracováním osobních údajů<!--/t--></a> <!--t:poptavka.souhlas_za-->pro vyřízení poptávky.<!--/t--> <span class="tv-todo">[DOPLNIT odkaz]</span></span></label></div>
+              <div class="tv-field tv-field--full"><label class="tv-check"><input type="checkbox" name="souhlas" required><span><!--t:poptavka.souhlas_pred-->Souhlasím se<!--/t--> <a href="zasady.html" target="_blank" rel="noopener"><!--t:poptavka.souhlas_odkaz-->zpracováním osobních údajů<!--/t--></a> <!--t:poptavka.souhlas_za-->pro vyřízení poptávky.<!--/t--></span></label></div>
               <p class="tv-field--full tv-file tv-file--bad tv-form__error" role="alert" hidden></p>
               <div class="tv-field--full tv-submit">
                 <button class="tv-btn tv-btn--ink" type="submit"><!--t:poptavka.tlacitko-->Odeslat poptávku<!--/t--><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
@@ -621,11 +621,10 @@
       </div>
     </div>
     <p class="tv-bye tv-d" data-lines="1" aria-hidden="true"><span class="tv-line"><span class="tv-line__in"><!--t:paticka.rozlouceni-->Ať to drží!<!--/t--></span></span></p>
-    <div class="tv-legal"><span><!--t:paticka.copyright-->© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258<!--/t--></span><span><!--t:paticka.zasady-->Zásady ochrany osobních údajů<!--/t--> <span class="tv-todo">[DOPLNIT]</span></span></div>
+    <div class="tv-legal"><span><!--t:paticka.copyright-->© 2026 Top výšivka · Flavio company s.r.o. · IČ 03923258<!--/t--></span><a href="zasady.html"><!--t:paticka.zasady-->Zásady ochrany osobních údajů<!--/t--></a></div>
   </div>
 </footer>
 
-<div class="tv-cursor" aria-hidden="true"></div>
 </div>
 
 <script src="assets/js/vendor/gsap.min.js" defer></script>
