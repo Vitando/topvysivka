@@ -1,0 +1,162 @@
+# Administrace textů – Pages CMS (https://pagescms.org)
+# Upravuje jen content/texty.json; do index.html je promítne GitHub Action .github/workflows/texts.yml.
+
+content:
+  - name: texty
+    label: Texty webu
+    type: file
+    path: content/texty.json
+    format: json
+    fields:
+      - name: uvod
+        label: Úvod (horní část stránky)
+        type: object
+        fields:
+          - name: stitek
+            label: Štítek nad nadpisem
+            type: string
+            required: true
+          - name: podtitul
+            label: Podtitul pod štítkem
+            type: text
+            required: true
+          - name: text
+            label: Hlavní text
+            type: text
+            required: true
+          - name: poznamka
+            label: Poznámka pod tlačítky
+            type: string
+            required: true
+
+      - name: zaruky
+        label: Záruky (čtyři výhody pod úvodem)
+        type: object
+        fields:
+          - name: zaruka1
+            label: 1. záruka
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: zaruka2
+            label: 2. záruka
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: zaruka3
+            label: 3. záruka
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: zaruka4
+            label: 4. záruka
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+
+      - name: sluzby
+        label: Služby
+        type: object
+        fields:
+          - name: uvod
+            label: Úvodní text sekce
+            type: text
+            required: true
+          - name: nasivky
+            label: Karta „Nášivky“
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: popis, label: Popis, type: text, required: true }
+              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+          - name: vysivky
+            label: Karta „Výšivky“
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: popis, label: Popis, type: text, required: true }
+              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+          - name: textil
+            label: Karta „Reklamní textil“
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: popis, label: Popis, type: text, required: true }
+              - { name: hlaska, label: Vtipná hláška, type: string, required: true }
+
+      - name: jak
+        label: Jak to funguje
+        type: object
+        fields:
+          - name: uvod
+            label: Úvodní text sekce
+            type: text
+            required: true
+          - name: krok1
+            label: 1. krok
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: krok2
+            label: 2. krok
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: krok3
+            label: 3. krok
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+          - name: krok4
+            label: 4. krok
+            type: object
+            fields:
+              - { name: nadpis, label: Nadpis, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+
+      - name: instagram
+        label: Instagram (Čerstvě vyšito)
+        type: object
+        fields:
+          - name: uvod
+            label: Úvodní text sekce
+            description: Fotky se načítají z Instagramu automaticky, tady jde upravit jen text.
+            type: text
+            required: true
+
+      - name: technika
+        label: Technická karta (Stroj & nitě)
+        type: object
+        fields:
+          - name: uvod
+            label: Úvodní text sekce
+            type: text
+            required: true
+
+      - name: faq
+        label: Časté dotazy (FAQ)
+        description: Otázky můžete přidávat, mazat i přesouvat. První otázka je na webu rozbalená.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {otazka}"
+        fields:
+          - { name: otazka, label: Otázka, type: string, required: true }
+          - { name: odpoved, label: Odpověď, type: text, required: true }
+
+      - name: kontakt
+        label: Kontakt
+        type: object
+        fields:
+          - name: uvod
+            label: Úvodní text sekce
+            type: text
+            required: true
