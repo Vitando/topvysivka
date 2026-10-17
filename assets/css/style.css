@@ -18,6 +18,7 @@
 .tv-line{display:block;overflow:hidden;padding-top:.14em;margin-top:-.14em;padding-bottom:.05em;margin-bottom:-.05em}
 .tv-line__in{display:block}
 .tv-d .tv-line + .tv-line{margin-top:.07em}
+.tv-d .tv-line{white-space:nowrap}
 .tv-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:2.5px solid var(--ink);border-radius:999px;background:var(--cream);color:var(--ink);font:600 15px/1 'Baloo 2',ui-rounded,sans-serif;white-space:nowrap}
 .tv-pill svg{width:16px;height:16px}
 .tv-stitch{height:4px;background:repeating-linear-gradient(90deg,var(--ink) 0 14px,transparent 14px 24px);border-radius:2px}
@@ -40,6 +41,16 @@
 .tv-btn--cream{background:var(--cream)}
 .tv-btn--sm{min-height:50px;padding:0 22px;font-size:16.5px;box-shadow:4px 4px 0 var(--ink)}
 .tv-btn--sm:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+/* tmavé hlavní tlačítko: růžový stín, viditelné prošití, šipka ve žlutém kolečku */
+.tv-btn--ink{box-shadow:6px 6px 0 var(--pink)}
+.tv-btn--ink::after{opacity:.4;transform:none}
+.tv-btn--ink:hover{box-shadow:2px 2px 0 var(--pink)}
+.tv-btn--ink:hover::after{opacity:.75}
+.tv-btn--ink:active{box-shadow:0 0 0 var(--pink)}
+.tv-btn--ink.tv-btn--sm{box-shadow:4px 4px 0 var(--pink)}
+.tv-btn--ink.tv-btn--sm:hover{box-shadow:1px 1px 0 var(--pink)}
+.tv-btn--ink:has(svg){gap:14px;padding-right:9px}
+.tv-btn--ink svg{box-sizing:content-box;width:18px;height:18px;padding:9px;border-radius:50%;background:var(--yellow);color:var(--ink)}
 
 /* header */
 .tv-header{position:sticky;top:0;z-index:60;background-color:var(--cream)}
