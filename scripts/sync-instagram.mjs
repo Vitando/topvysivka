@@ -17,6 +17,8 @@ import { fileURLToPath } from 'node:url';
 
 const FEED_URL = process.env.BEHOLD_FEED_URL || 'https://feeds.behold.so/PP8w0EJWDQ0HDUtMJgjM';
 const PROFILE_URL = process.env.INSTAGRAM_PROFILE_URL || 'https://www.instagram.com/topvysivka.cz/';
+// Galerie se plní jen z tohoto účtu; feed napojený na jiný účet se ignoruje
+const EXPECTED_USERNAME = process.env.INSTAGRAM_USERNAME || 'topvysivka.cz';
 const MAX_POSTS = 9;
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -79,6 +81,10 @@ async function main() {
   const feedPosts = Array.isArray(data) ? data : data.posts || [];
   if (!feedPosts.length) throw new Error('feed neobsahuje žádné příspěvky');
   const username = Array.isArray(data) ? '' : data.username || '';
+  if (username && username !== EXPECTED_USERNAME) {
+    console.log(`Feed je napojený na účet @${username}, ne @${EXPECTED_USERNAME} – galerie zůstává beze změny.`);
+    return;
+  }
 
   await mkdir(IMG_DIR, { recursive: true });
   const existing = await readdir(IMG_DIR);
