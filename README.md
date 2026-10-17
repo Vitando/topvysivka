@@ -25,7 +25,7 @@ assets/img/                fotka do úvodu, práce (Instagram), loga zákazník�
    (např. Formspree `https://formspree.io/f/…` nebo vlastní PHP skript). Bez něj formulář jen ukáže poděkování.
    Formulář posílá: jmeno, email, telefon, pocet, typ, rozmer, umisteni, material, termin, vlastni_textil, prilohy[], zprava, souhlas.
    Pole `web` je skrytá past na spamboty – na serveru zahodit zprávy, kde je vyplněné.
-2. **Odkazy označené [DOPLNIT]** v `index.html`: vzorník barev, zásady ochrany osobních údajů, Facebook.
+2. **Odkazy označené [DOPLNIT]** v `index.html`: vzorník barev, zásady ochrany osobních údajů.
 3. **Instagram** – galerie (mřížka 3×3, 9 posledních příspěvků) se plní automaticky z Behold.so feedu.
    - Stažené příspěvky si pamatuje v `assets/img/instagram/posts.json`: nový post se přidá nahoru, nejstarší vypadne.
      Na mobilu (2 sloupce) se ukazuje 8 fotek.
