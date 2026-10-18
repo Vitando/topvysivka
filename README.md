@@ -17,7 +17,7 @@ Statický one-page web: čisté HTML + CSS + JavaScript, bez build kroku.
 index.html                 obsah celé stránky
 assets/css/style.css       veškerý vzhled (barvy v :root u .tv – proměnné --yellow, --pink, --sky, --mint, --ink…)
 assets/js/main.js          animace (GSAP), 3D nášivka a cívky (Three.js), nit při scrollu, menu, FAQ, formulář
-assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158
+assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158 (3D se stahuje až po zobrazení stránky, main.js loadThree)
 assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů

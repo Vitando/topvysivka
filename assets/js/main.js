@@ -29,7 +29,7 @@ class TopVysivka extends Base {
     };
     ready(() => !!this.root, () => { this.fitTitle(); this.fitLines(); });
     ready(() => this.root && window.gsap && window.ScrollTrigger, () => this.initMotion());
-    ready(() => this.root && window.THREE && window.gsap, () => this.initThree());
+    ready(() => this.root && window.gsap, () => this.loadThree());
   }
 
   componentWillUnmount() {
@@ -40,6 +40,17 @@ class TopVysivka extends Base {
   componentDidUpdate(prevProps, prevState) {
     const was = prevState && prevState.sent;
     if (this.state && this.state.sent && !was) this.celebrate();
+  }
+
+  /* přepočítat rozměry, až se donačte písmo (diakritika se stahuje zvlášť, i po document.fonts.ready) */
+  whenFontsChange(run) {
+    if (document.fonts) {
+      if (document.fonts.ready) document.fonts.ready.then(run);
+      const f = () => requestAnimationFrame(run);
+      document.fonts.addEventListener('loadingdone', f);
+      this._clean.push(() => document.fonts.removeEventListener('loadingdone', f));
+    }
+    window.addEventListener('load', run, { once: true });
   }
 
   /* velké nadpisy sekcí: když se dlouhé slovo (třeba z administrace) nevejde na šířku, zmenší se písmo */
@@ -63,7 +74,7 @@ class TopVysivka extends Base {
       });
     };
     run();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    this.whenFontsChange(run);
     let raf = 0;
     const onResize = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(run); };
     window.addEventListener('resize', onResize);
@@ -89,7 +100,7 @@ class TopVysivka extends Base {
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     };
     run();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    this.whenFontsChange(run);
     if (window.ResizeObserver) {
       let last = 0;
       const ro = new ResizeObserver(() => { const w = h1.clientWidth; if (w !== last) { last = w; requestAnimationFrame(run); } });
@@ -207,7 +218,6 @@ class TopVysivka extends Base {
       /* parallax */
       if (live) {
         const hero = q('.tv-hero')[0];
-        gsap.to(q('.tv-hero__title'), { yPercent: 14, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         gsap.to(q('.tv-hero__media'), { y: -90, rotate: -5, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         q('.tv-sticker[data-speed]').forEach((el) => gsap.to(el, { y: () => -parseFloat(el.getAttribute('data-speed')) * 220, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
       }
@@ -398,6 +408,24 @@ class TopVysivka extends Base {
     this.satin(ctx, S, (m) => { spark(m, c - rPx * 0.56, c - rPx * 0.4, rPx * 0.13); spark(m, c + rPx * 0.57, c - rPx * 0.36, rPx * 0.09); }, bump ? ['#ffffff', '#b8b8b8'] : ['#F8D547', '#D8B21C'], 0.6, bump);
   }
 
+  /* 3D knihovna (636 kB) se stáhne až po zobrazení stránky, aby nezdržovala načtení */
+  loadThree() {
+    if (window.THREE) { this.initThree(); return; }
+    const c = navigator.connection;
+    if (c && (c.saveData || /2g/.test(c.effectiveType || ''))) return; // úsporný režim / pomalé připojení: bez 3D
+    const start = () => {
+      if (!this._alive) return;
+      const s = document.createElement('script');
+      s.src = 'assets/js/vendor/three.min.js';
+      s.async = true;
+      s.onload = () => { if (this._alive) this.initThree(); };
+      document.head.appendChild(s);
+    };
+    const idle = () => (window.requestIdleCallback ? window.requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 200));
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
+  }
+
   initThree() {
     if (this._three || this.props.threeD === false) return;
     this._three = true;
@@ -408,7 +436,8 @@ class TopVysivka extends Base {
     let renderer;
     try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' }); } catch (e) { return; }
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.props.motion === false;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const weak = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, weak ? 1 : 1.5)); // plátno je přes celý úvod – plné 2× rozlišení zbytečně zatěžuje grafiku
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
