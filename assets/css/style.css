@@ -417,9 +417,13 @@ textarea.tv-input{min-height:136px;resize:vertical}
   .tv-ribbon{padding:14px 0}
   .tv-ribbon--front{bottom:104px}.tv-ribbon--back{bottom:122px}
   .tv-head__aside{width:100%;justify-content:space-between}
-  .tv-guar{grid-template-columns:1fr;row-gap:28px}
-  .tv-guar__item{flex-direction:row;align-items:flex-start;gap:18px;padding:0}
+  /* záruky jako kartičky-nášivky: ikona vlevo, vedle nadpis, pod ním text */
+  .tv-guar{grid-template-columns:1fr;row-gap:18px}
+  .tv-guar__item{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:16px;row-gap:10px;padding:18px 18px 20px;border:3px solid var(--ink);border-radius:24px;background:var(--paper);box-shadow:5px 5px 0 var(--ink)}
   .tv-guar__item::before{display:none}
+  .tv-guar__item::after{content:"";position:absolute;inset:7px;border:2px dashed rgba(59,36,24,.28);border-radius:18px;pointer-events:none}
+  .tv-guar__item p{grid-column:1/-1;font-size:15.5px}
+  .tv-guar h3{font-size:21px}
   .tv-badge{width:64px;height:64px}
   .tv-badge svg{width:28px;height:28px}
   .tv-svc__mascot{width:120px}
