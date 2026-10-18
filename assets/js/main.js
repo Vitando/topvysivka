@@ -5,9 +5,9 @@
 (function () {
   'use strict';
 
-  /* Kam se odesílá poptávka. Prázdné = formulář jen ukáže poděkování (ukázka).
-     Např. Formspree: 'https://formspree.io/f/XXXXXXX' nebo vlastní skript: '/odeslat.php' */
-  var FORM_ENDPOINT = '';
+  /* Kam se odesílá poptávka: Cloudflare Worker (src/worker.js) ji pošle e-mailem i s přílohami.
+     Prázdné = formulář jen ukáže poděkování (ukázka bez odesílání). */
+  var FORM_ENDPOINT = '/api/poptavka';
 
   class Base {
     constructor() { this.props = { motion: true, threeD: true }; this.state = {}; this.root = null; }
@@ -656,6 +656,11 @@ class TopVysivka extends Base {
     var errEl = form.querySelector('.tv-form__error');
     var ALLOWED = ['ai', 'pdf', 'svg', 'png', 'jpg', 'jpeg'];
     var MAX = 10 * 1024 * 1024;
+    var MAX_TOTAL = 25 * 1024 * 1024; /* stejné limity hlídá i src/worker.js */
+    var MAX_FILES = 10;
+    var started = Date.now();
+    var telLink = root.querySelector('a[href^="tel:"]'); /* telefon z kontaktů (mění se v administraci) */
+    var tel = telLink ? telLink.textContent.trim() : '';
     var files = [];
     var fmt = function (n) { var mb = n / 1048576; return mb >= 1 ? mb.toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(n / 1024)) + ' kB'; };
     var problem = function (f) { var ext = (String(f.name).split('.').pop() || '').toLowerCase(); return f.size > MAX ? 'Víc než 10 MB' : (ALLOWED.indexOf(ext) < 0 ? 'Nepodporovaný formát' : ''); };
@@ -690,12 +695,24 @@ class TopVysivka extends Base {
       e.preventDefault();
       if (form.elements.web && form.elements.web.value) return; /* anti-spam: bot vyplnil skryté pole */
       if (files.some(problem)) { showError('Některý soubor je moc velký nebo v nepodporovaném formátu. Odeberte ho prosím.'); return; }
+      if (files.length > MAX_FILES) { showError('Najednou jde poslat max. ' + MAX_FILES + ' souborů.'); return; }
+      if (files.reduce(function (s, f) { return s + f.size; }, 0) > MAX_TOTAL) { showError('Přílohy jsou dohromady moc velké (max. 25 MB). Větší soubory nám pošlete e-mailem.'); return; }
       if (!FORM_ENDPOINT) { done(); return; }
       var btn = form.querySelector('[type="submit"]');
       btn.disabled = true;
-      fetch(FORM_ENDPOINT, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
-        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); done(); })
-        .catch(function () { showError('Odeslání se nepovedlo. Zkuste to prosím znovu, nebo nám zavolejte na +420 734 395 056.'); })
+      /* přílohy bereme ze seznamu (drag & drop funguje i tam, kde nejde přepsat input.files) */
+      var fd = new FormData(form);
+      fd.delete(input.name);
+      files.forEach(function (f) { fd.append(input.name, f, f.name); });
+      fd.append('ts_ms', String(Date.now() - started));
+      fetch(FORM_ENDPOINT, { method: 'POST', body: fd, headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (d) {
+            if (!r.ok || !d.ok) { var err = new Error('HTTP ' + r.status); err.msg = d.error; throw err; }
+            done();
+          });
+        })
+        .catch(function (err) { showError((err && err.msg ? err.msg + ' ' : 'Odeslání se nepovedlo. ') + 'Zkuste to prosím znovu, nebo nám zavolejte' + (tel ? ' na ' + tel : '') + '.'); })
         .finally(function () { btn.disabled = false; });
     });
     var again = sent && sent.querySelector('[data-reset]');

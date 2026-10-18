@@ -22,7 +22,8 @@ assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po so
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů
 _headers                   bezpečnostní hlavičky pro Cloudflare (CSP, HSTS…)
-wrangler.jsonc             nastavení Cloudflare Workers (web = složka dist/)
+wrangler.jsonc             nastavení Cloudflare Workers (web = složka dist/, /api/* = src/worker.js)
+src/worker.js              příjem poptávek z formuláře a odeslání e-mailem (Resend)
 scripts/build-site.mjs     sestaví dist/ pro Cloudflare
 vercel.json                totéž pro Vercel (dočasně, do přesunu na Cloudflare)
 assets/img/                fotka do úvodu, práce (Instagram), loga zákazníků
@@ -30,8 +31,12 @@ assets/img/                fotka do úvodu, práce (Instagram), loga zákazník�
 
 ## Co je potřeba doplnit před spuštěním
 
-1. **Odesílání formuláře** – v `assets/js/main.js` nahoře nastavit `FORM_ENDPOINT`
-   (např. Formspree `https://formspree.io/f/…` nebo vlastní PHP skript). Bez něj formulář jen ukáže poděkování.
+1. **Odesílání formuláře** – `assets/js/main.js` posílá poptávku na `/api/poptavka`; zpracuje ji Cloudflare Worker
+   `src/worker.js` (kontrola polí a příloh, anti-spam) a pošle ji přes **Resend** na `FORM_TO` (info@topvysivka.cz)
+   i s přílohami, s „Odpovědět“ rovnou zákazníkovi; zákazníkovi přijde potvrzení (`FORM_CONFIRM`).
+   Nastavení: `vars` ve `wrangler.jsonc`; klíč **`RESEND_API_KEY` jako Secret** v Cloudflare (Settings → Variables and Secrets).
+   Odesílatel `FORM_FROM` musí být na doméně ověřené v Resendu (DNS záznamy z Resendu přidat v Cloudflare).
+   Limity: soubory AI/PDF/SVG/PNG/JPG, max. 10 MB/soubor, 25 MB a 10 souborů celkem.
    Formulář posílá: jmeno, email, telefon, pocet, typ, rozmer, umisteni, material, termin, vlastni_textil, prilohy[], zprava, souhlas.
    Pole `web` je skrytá past na spamboty – na serveru zahodit zprávy, kde je vyplněné.
 2. **Zásady ochrany osobních údajů** jsou v `zasady.html` (text nechat zkontrolovat klientem).
@@ -95,7 +100,7 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
   Přidání dalšího nástroje = zvýšit `CONSENT_VERSION`, doplnit ho do lišty a do `zasady.html`.
 - **Bezpečnostní hlavičky** jsou v `_headers` (Cloudflare) a dočasně i ve `vercel.json` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
   Permissions-Policy, nosniff). CSP povoluje jen náš web, Google Analytics, Meta Pixel a služby formuláře
-  Formspree / Web3Forms. **Jiná služba pro formulář nebo jiný měřicí nástroj = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
+  vlastní `/api/poptavka`. **Jiný měřicí nástroj nebo externí služba = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
 - Na web se nasazuje jen složka `dist/` (README, administrace, skripty ani `content/` na webu nejsou).
   Dočasné adresy `*.workers.dev` mají `X-Robots-Tag: noindex`, aby je Google neindexoval.
 - Texty z administrace se do HTML vkládají escapované, takže přes ně nejde vložit kód.

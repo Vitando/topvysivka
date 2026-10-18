@@ -1,12 +1,23 @@
-// Cloudflare Workers – statický web (bez serverového kódu).
+// Cloudflare Workers – statický web + odesílání poptávek.
 // Build command:  node scripts/build-site.mjs   (sestaví dist/)
-// Deploy command: npx wrangler deploy           (nahraje dist/ podle tohoto souboru)
+// Deploy command: npx wrangler deploy           (nahraje dist/ a src/worker.js podle tohoto souboru)
 // "name" musí odpovídat názvu projektu v Cloudflare.
+// Tajný klíč RESEND_API_KEY se nastavuje v Cloudflare (Settings → Variables and Secrets), NE sem.
 {
   "name": "topvysivka",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "none"
-  }
+    "binding": "ASSETS",
+    "not_found_handling": "none",
+    // kód běží jen pro /api/*, zbytek webu servíruje Cloudflare přímo (i s hlavičkami z _headers)
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "FORM_TO": "info@topvysivka.cz",
+    "FORM_FROM": "Top výšivka – web <poptavky@topvysivka.cz>",
+    "FORM_CONFIRM": "1"
+  },
+  "observability": { "enabled": true }
 }
