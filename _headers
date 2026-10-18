@@ -1,5 +1,5 @@
-# Hlavičky pro Cloudflare Pages (stejné jako vercel.json, ten se po přesunu smaže)
-# Formát: https://developers.cloudflare.com/pages/configuration/headers/
+# Hlavičky pro Cloudflare (Workers – statický web) (stejné jako vercel.json, ten se po přesunu smaže)
+# Formát: https://developers.cloudflare.com/workers/static-assets/headers/
 
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://formspree.io https://api.web3forms.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://api.web3forms.com; upgrade-insecure-requests
@@ -13,6 +13,6 @@
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Dočasná adresa *.pages.dev se nemá objevit v Googlu (web je na topvysivka.cz)
-https://:project.pages.dev/*
+# Dočasné adresy *.workers.dev se nemají objevit v Googlu (web je na topvysivka.cz)
+https://:name.:subdomain.workers.dev/*
   X-Robots-Tag: noindex

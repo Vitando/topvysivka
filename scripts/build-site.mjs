@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Sestaví složku dist/ pro Cloudflare Pages: jen soubory webu, bez README, administrace a skriptů.
-// Cloudflare Pages: Build command `node scripts/build-site.mjs`, Build output directory `dist`.
+// Sestaví složku dist/ pro Cloudflare: jen soubory webu, bez README, administrace a skriptů.
+// Cloudflare: Build command `node scripts/build-site.mjs`, Deploy command `npx wrangler deploy` (viz wrangler.jsonc).
 //
 // Spuštění ručně:  node scripts/build-site.mjs
 

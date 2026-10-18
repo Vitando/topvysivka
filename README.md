@@ -7,9 +7,9 @@ Statický one-page web: čisté HTML + CSS + JavaScript, bez build kroku.
 - Stačí otevřít `index.html` v prohlížeči.
 - Lepší je lokální server (kvůli fontům a 3D):
   `npx serve .` nebo `python3 -m http.server 8000` → http://localhost:8000
-- Nasazení: **Cloudflare Pages** napojené na GitHub (každý push do `main` = nové nasazení).
-  Build command `node scripts/build-site.mjs`, Build output directory `dist` – na web jde jen `index.html`,
-  `zasady.html`, `assets/` a `_headers`. Přechodně běží i Vercel (`vercel.json`, `.vercelignore`), po přesunu domény ho smazat.
+- Nasazení: **Cloudflare Workers** (statický web) napojené na GitHub (každý push do `main` = nové nasazení).
+  Build command `node scripts/build-site.mjs`, Deploy command `npx wrangler deploy` (nastavení ve `wrangler.jsonc`)
+  – na web jde jen `index.html`, `zasady.html`, `assets/` a `_headers`. Přechodně běží i Vercel (`vercel.json`, `.vercelignore`), po přesunu domény ho smazat.
 
 ## Struktura
 
@@ -21,8 +21,9 @@ assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158
 assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů
-_headers                   bezpečnostní hlavičky pro Cloudflare Pages (CSP, HSTS…)
-scripts/build-site.mjs     sestaví dist/ pro Cloudflare Pages
+_headers                   bezpečnostní hlavičky pro Cloudflare (CSP, HSTS…)
+wrangler.jsonc             nastavení Cloudflare Workers (web = složka dist/)
+scripts/build-site.mjs     sestaví dist/ pro Cloudflare
 vercel.json                totéž pro Vercel (dočasně, do přesunu na Cloudflare)
 assets/img/                fotka do úvodu, práce (Instagram), loga zákazníků
 ```
@@ -96,7 +97,7 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
   Permissions-Policy, nosniff). CSP povoluje jen náš web, Google Analytics, Meta Pixel a služby formuláře
   Formspree / Web3Forms. **Jiná služba pro formulář nebo jiný měřicí nástroj = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
 - Na web se nasazuje jen složka `dist/` (README, administrace, skripty ani `content/` na webu nejsou).
-  Dočasná adresa `*.pages.dev` má `X-Robots-Tag: noindex`, aby ji Google neindexoval.
+  Dočasné adresy `*.workers.dev` mají `X-Robots-Tag: noindex`, aby je Google neindexoval.
 - Texty z administrace se do HTML vkládají escapované, takže přes ně nejde vložit kód.
 
 ## Poznámky

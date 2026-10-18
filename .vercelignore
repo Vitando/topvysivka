@@ -6,3 +6,4 @@ content
 scripts
 dist
 _headers
+wrangler.jsonc
