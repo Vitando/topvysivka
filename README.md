@@ -7,7 +7,9 @@ Statický one-page web: čisté HTML + CSS + JavaScript, bez build kroku.
 - Stačí otevřít `index.html` v prohlížeči.
 - Lepší je lokální server (kvůli fontům a 3D):
   `npx serve .` nebo `python3 -m http.server 8000` → http://localhost:8000
-- Nasazení: nahrát celou složku na jakýkoli hosting (Wedos, Forpsi, Netlify, Vercel, GitHub Pages…).
+- Nasazení: **Cloudflare Pages** napojené na GitHub (každý push do `main` = nové nasazení).
+  Build command `node scripts/build-site.mjs`, Build output directory `dist` – na web jde jen `index.html`,
+  `zasady.html`, `assets/` a `_headers`. Přechodně běží i Vercel (`vercel.json`, `.vercelignore`), po přesunu domény ho smazat.
 
 ## Struktura
 
@@ -19,7 +21,9 @@ assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158
 assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů
-vercel.json                bezpečnostní hlavičky (CSP, HSTS…)
+_headers                   bezpečnostní hlavičky pro Cloudflare Pages (CSP, HSTS…)
+scripts/build-site.mjs     sestaví dist/ pro Cloudflare Pages
+vercel.json                totéž pro Vercel (dočasně, do přesunu na Cloudflare)
 assets/img/                fotka do úvodu, práce (Instagram), loga zákazníků
 ```
 
@@ -53,7 +57,7 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
   `node scripts/admin-config.mjs` z nich vygeneruje `.pages.yml` a `scripts/text-limits.json` (oba ručně neupravovat).
 - **Jak se dostanou na web:** uložení v administraci = commit `content/texty.json` → GitHub Action
   `.github/workflows/texts.yml` spustí `scripts/apply-texts.mjs`, ten přepíše texty v `index.html` a commitne je →
-  Vercel web nasadí. Trvá to zhruba 1–2 minuty; pak stránku obnovit (Cmd+Shift+R).
+  Cloudflare web nasadí. Trvá to zhruba 1–2 minuty; pak stránku obnovit (Cmd+Shift+R).
   Texty v sekci „Google a sdílení odkazu“ na stránce vidět nejsou (jen v Googlu a v náhledu odkazu).
 - **Blbuvzdornost:** každé pole má maximální délku (změřenou v prohlížeči na mobilu i desktopu) a telefony, e-mail
   a čísla kontrolu formátu – Pages CMS delší / špatný text nedovolí uložit. Pojistka v `apply-texts.mjs`: text přes limit
@@ -88,10 +92,11 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
 - **Pravidla lišty** (§ 89 zákona č. 127/2005 Sb., GDPR, doporučení ÚOOÚ a EDPB): odmítnutí je stejně snadné jako přijetí
   (stejná tlačítka v první vrstvě), nic není předem zaškrtnuté, volba platí 6 měsíců, souhlas jde kdykoli změnit.
   Přidání dalšího nástroje = zvýšit `CONSENT_VERSION`, doplnit ho do lišty a do `zasady.html`.
-- **Bezpečnostní hlavičky** jsou ve `vercel.json` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
+- **Bezpečnostní hlavičky** jsou v `_headers` (Cloudflare) a dočasně i ve `vercel.json` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
   Permissions-Policy, nosniff). CSP povoluje jen náš web, Google Analytics, Meta Pixel a služby formuláře
   Formspree / Web3Forms. **Jiná služba pro formulář nebo jiný měřicí nástroj = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
-- `.vercelignore` nenasazuje na web README, administraci, skripty ani `content/`.
+- Na web se nasazuje jen složka `dist/` (README, administrace, skripty ani `content/` na webu nejsou).
+  Dočasná adresa `*.pages.dev` má `X-Robots-Tag: noindex`, aby ji Google neindexoval.
 - Texty z administrace se do HTML vkládají escapované, takže přes ně nejde vložit kód.
 
 ## Poznámky
