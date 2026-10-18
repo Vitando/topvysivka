@@ -21,6 +21,11 @@ assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158
 assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů
+obchodni-podminky.html     obchodní podmínky a reklamační řád – NÁVRH, zatím neodkazovaný (noindex), po schválení klientem
+                           doplnit datum účinnosti, smazat žlutý rámeček, přidat odkaz do patičky a do sitemap.xml
+404.html                   stránka „nenalezeno“ (Cloudflare ji vrací pro neexistující adresy)
+robots.txt, sitemap.xml    pro vyhledávače
+assets/img/favicon.svg     ikona v záložce; apple-touch-icon.png pro iPhone; og-image.jpg = náhled při sdílení (1200×630)
 _headers                   bezpečnostní hlavičky pro Cloudflare (CSP, HSTS…)
 wrangler.jsonc             nastavení Cloudflare Workers (web = složka dist/, /api/* = src/worker.js)
 src/worker.js              příjem poptávek z formuláře a odeslání e-mailem (Resend)
@@ -72,7 +77,8 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
 - **Když se něco pokazí:** každé uložení je commit na GitHubu, jakoukoli změnu jde vrátit (Revert).
 - **Značky v `index.html`:** každý upravitelný text je obalený `<!--t:klic-->text<!--/t-->` (klíč = cesta v JSON,
   např. `sluzby.nasivky.popis`). Stejný klíč může být na stránce víckrát (menu, telefony, běžící pásy).
-  FAQ se generuje celé mezi `<!--faq:start-->` a `<!--faq:end-->`, `<title>` podle `seo.titulek`.
+  FAQ se generuje celé mezi `<!--faq:start-->` a `<!--faq:end-->`, `<title>` podle `seo.titulek`
+  a údaje o firmě pro Google (`<script type="application/ld+json" id="tv-ld">`) z kontaktů.
   Značky nemazat; text mezi nimi při ruční úpravě HTML přepíše další uložení v administraci.
 - **Atributy:** tag s `data-t="atribut=zdroj;…"` dostane hodnotu atributu z JSON (placeholdery, hodnoty voleb
   ve formuláři, `data-count` čísel, meta popisy). Zdroj `tel:klic` / `mailto:klic` udělá odkaz na telefon / e-mail,

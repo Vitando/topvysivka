@@ -10,7 +10,7 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "not_found_handling": "none",
+    "not_found_handling": "404-page",
     // kód běží jen pro /api/*, zbytek webu servíruje Cloudflare přímo (i s hlavičkami z _headers)
     "run_worker_first": ["/api/*"]
   },

@@ -69,6 +69,42 @@ function attrValue(data, src) {
   return v;
 }
 
+// Strukturované údaje o firmě pro Google (adresa, telefon, otevírací doba) – z kontaktů v administraci
+const SITE = 'https://topvysivka.cz/';
+function companyLd(data) {
+  const g = (k) => textAt(data, k);
+  const mesto = g('kontakt.adresa_mesto') || '';
+  const psc = mesto.match(/^(\d{3}\s?\d{2})\s+(.+)$/);
+  const tel = g('kontakt.telefon1');
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: g('menu.logo') || 'Top výšivka',
+    legalName: g('kontakt.firma') || undefined,
+    description: g('seo.popis') || undefined,
+    url: SITE,
+    image: SITE + 'assets/img/og-image.jpg',
+    logo: SITE + 'assets/img/apple-touch-icon.png',
+    telephone: tel ? tel.replace(/[^\d+]/g, '') : undefined,
+    email: g('kontakt.email') || undefined,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: g('kontakt.adresa_ulice') || undefined,
+      postalCode: psc ? psc[1].replace(/\s/g, '') : undefined,
+      addressLocality: psc ? psc[2] : mesto || undefined,
+      addressCountry: 'CZ',
+    },
+    sameAs: ['https://www.instagram.com/topvysivka.cz/', 'https://www.facebook.com/topvysivkacz/'],
+  };
+  // „Po–Pá 8–17“ → otevírací doba; jiný tvar textu se do Googlu neposílá (radši nic než špatně)
+  const doba = (g('kontakt.doba') || '').match(/^Po\s*[–-]\s*Pá\s+(\d{1,2})(?::(\d{2}))?\s*[–-]\s*(\d{1,2})(?::(\d{2}))?$/);
+  if (doba) {
+    const t = (h, m) => `${h.padStart(2, '0')}:${m || '00'}`;
+    ld.openingHoursSpecification = [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: t(doba[1], doba[2]), closes: t(doba[3], doba[4]) }];
+  }
+  return JSON.stringify(ld).replace(/</g, '\\u003c'); // bezpečně uvnitř <script>
+}
+
 const FAQ_ICON = '<span class="tv-qa__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></span>';
 
 // Stejná šablona jako ruční FAQ; první otázka otevřená, ostatní zavřené (akordeon v assets/js/main.js)
@@ -98,6 +134,8 @@ async function main() {
     }
     return tag;
   });
+
+  next = next.replace(/(<script type="application\/ld\+json" id="tv-ld">)[\s\S]*?(<\/script>)/, (_, a, b) => a + companyLd(data) + b);
 
   const title = textAt(data, 'seo.titulek');
   if (title === null) missing.push('seo.titulek');

@@ -76,6 +76,11 @@ async function download(url, id) {
 
 async function main() {
   const res = await fetch(FEED_URL, { signal: AbortSignal.timeout(20000), headers: { accept: 'application/json' } });
+  // feed ještě není napojený / byl smazaný: jen upozornit (žádná chyba a e-mail z GitHubu každý den)
+  if (res.status === 404 || res.status === 410) {
+    console.log(`::warning title=Instagram feed není napojený::Behold feed vrací HTTP ${res.status} – galerie zůstává beze změny.`);
+    return;
+  }
   if (!res.ok) throw new Error(`feed vrátil HTTP ${res.status}`);
   const data = await res.json();
   const feedPosts = Array.isArray(data) ? data : data.posts || [];
