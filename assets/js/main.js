@@ -190,7 +190,7 @@ class TopVysivka extends Base {
       gsap.from(q('.tv-mascot, .tv-bubble'), { y: 140, opacity: 0, duration: 1.2, stagger: 0.25, ease: 'back.out(1.6)', scrollTrigger: st(q('#jak')[0], { start: 'top 75%' }) });
 
       /* Instagram polaroidy vletí */
-      gsap.from(q('.tv-polaroid'), { y: 220, rotate: (i) => (i % 2 ? 28 : -28), opacity: 0, duration: 1.2, stagger: { each: 0.08, from: 'random' }, ease: 'back.out(1.4)', clearProps: 'transform,opacity', scrollTrigger: st(q('.tv-ig__grid')[0], { start: 'top 88%' }) });
+      gsap.from(q('.tv-polaroid'), { y: 160, rotate: (i) => (i % 2 ? 22 : -22), opacity: 0, duration: 0.65, stagger: { each: 0.045, from: 'random' }, ease: 'back.out(1.5)', clearProps: 'transform,opacity', scrollTrigger: st(q('.tv-ig__grid')[0], { start: 'top 100%' }) });
 
       /* technická karta */
       gsap.from(q('.tv-cone'), { yPercent: 115, opacity: 0, duration: 0.9, stagger: 0.05, ease: 'back.out(2.4)', scrollTrigger: st(q('.tv-cones')[0]) });
@@ -387,7 +387,8 @@ class TopVysivka extends Base {
     const f = mk(), fc = f.getContext('2d');
     fc.fillStyle = colors[0]; fc.fillRect(0, 0, S, S);
     fc.save(); fc.translate(S / 2, S / 2); fc.rotate(angle); fc.fillStyle = colors[1];
-    for (let x = -S; x < S; x += 4.5) fc.fillRect(x, -S, 1.5, 2 * S);
+    const u = S / 1024; // rozteč pruhů podle velikosti textury, ať vzhled nezávisí na rozlišení
+    for (let x = -S; x < S; x += 4.5 * u) fc.fillRect(x, -S, 1.5 * u, 2 * S);
     fc.restore();
     fc.globalCompositeOperation = 'destination-in'; fc.drawImage(m, 0, 0);
     const t = mk(), tc = t.getContext('2d');
@@ -403,7 +404,8 @@ class TopVysivka extends Base {
     ctx.fillStyle = bump ? '#808080' : '#9CC3F3';
     ctx.fillRect(0, 0, S, S);
     ctx.save(); ctx.translate(c, c); ctx.rotate(-Math.PI / 4);
-    for (let x = -S, k = 0; x < S; x += 5, k++) { ctx.fillStyle = k % 2 ? 'rgba(255,255,255,0.16)' : 'rgba(30,50,110,0.14)'; ctx.fillRect(x, -S, 2.2, 2 * S); }
+    const u = S / 1024;
+    for (let x = -S, k = 0; x < S; x += 5 * u, k++) { ctx.fillStyle = k % 2 ? 'rgba(255,255,255,0.16)' : 'rgba(30,50,110,0.14)'; ctx.fillRect(x, -S, 2.2 * u, 2 * S); }
     ctx.restore();
     ctx.save(); ctx.lineCap = 'round'; ctx.setLineDash([rPx * 0.07, rPx * 0.05]); ctx.lineWidth = rPx * 0.04;
     ctx.strokeStyle = bump ? '#ffffff' : '#3B2418'; ctx.beginPath(); ctx.arc(c, c, rPx * 0.83, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
@@ -426,7 +428,8 @@ class TopVysivka extends Base {
       s.onload = () => { if (this._alive) this.initThree(); };
       document.head.appendChild(s);
     };
-    const idle = () => (window.requestIdleCallback ? window.requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 200));
+    // až po úvodní animaci (~2,7 s): kreslení textur a nahrání do grafiky by ji jinak rozsekalo
+    const idle = () => setTimeout(() => (window.requestIdleCallback ? window.requestIdleCallback(start, { timeout: 1500 }) : start()), 2800);
     if (document.readyState === 'complete') idle();
     else window.addEventListener('load', idle, { once: true });
   }
@@ -442,7 +445,7 @@ class TopVysivka extends Base {
     try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' }); } catch (e) { return; }
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.props.motion === false;
     const weak = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, weak ? 1 : 1.5)); // plátno je přes celý úvod – plné 2× rozlišení zbytečně zatěžuje grafiku
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, weak ? 1 : 1.25)); // plátno je přes celý úvod – plné 2× rozlišení zbytečně zatěžuje grafiku
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
@@ -464,7 +467,7 @@ class TopVysivka extends Base {
     const depth = 0.24;
     const pGeo = new THREE.ExtrudeGeometry(new THREE.Shape(pts), { depth, bevelEnabled: true, bevelThickness: 0.1, bevelSize: 0.05, bevelSegments: 4, curveSegments: 1 });
     pGeo.translate(0, 0, -depth / 2);
-    const S = 1024, Rmax = R * 1.12, rPx = (R / (2 * Rmax)) * S;
+    const S = 512, Rmax = R * 1.12, rPx = (R / (2 * Rmax)) * S; // textura odznaku; na obrazovce má ~300 px, 1024 zbytečně zdržovalo načtení
     const colC = document.createElement('canvas'); colC.width = colC.height = S;
     const bumpC = document.createElement('canvas'); bumpC.width = bumpC.height = S;
     const map = new THREE.CanvasTexture(colC); map.colorSpace = THREE.SRGBColorSpace;
