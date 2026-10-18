@@ -493,6 +493,12 @@
   "kontakt.ico_dic": {
     "max": 50
   },
+  "kontakt.sidlo": {
+    "max": 90
+  },
+  "kontakt.rejstrik": {
+    "max": 100
+  },
   "paticka.popis": {
     "max": 140
   },

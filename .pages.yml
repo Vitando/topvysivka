@@ -1133,21 +1133,21 @@ content:
                 options:
                   maxlength: 80
           - name: souhlas_pred
-            label: "Souhlas – text před odkazem"
+            label: "Zaškrtávátko u odeslání – text před odkazem"
             description: "Max. 40 znaků."
             type: string
             required: true
             options:
               maxlength: 40
           - name: souhlas_odkaz
-            label: "Souhlas – text odkazu"
+            label: "Zaškrtávátko u odeslání – text odkazu"
             description: "Max. 40 znaků."
             type: string
             required: true
             options:
               maxlength: 40
           - name: souhlas_za
-            label: "Souhlas – text za odkazem"
+            label: "Zaškrtávátko u odeslání – text za odkazem"
             description: "Max. 40 znaků."
             type: string
             required: true
@@ -1352,6 +1352,20 @@ content:
             required: true
             options:
               maxlength: 50
+          - name: sidlo
+            label: "Sídlo firmy"
+            description: "Povinný údaj (§ 435 občanského zákoníku) – musí odpovídat obchodnímu rejstříku. Max. 90 znaků."
+            type: string
+            required: true
+            options:
+              maxlength: 90
+          - name: rejstrik
+            label: "Zápis v obchodním rejstříku"
+            description: "Povinný údaj (§ 435 občanského zákoníku) – soud, oddíl a vložka. Max. 100 znaků."
+            type: string
+            required: true
+            options:
+              maxlength: 100
 
       - name: paticka
         label: "Patička"

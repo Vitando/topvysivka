@@ -2,3 +2,9 @@
 Thumbs.db
 node_modules/
 .vercel
+
+# tajné údaje nikdy do repozitáře
+.env
+.env.*
+*.pem
+*.key

@@ -117,7 +117,7 @@ const spec = [
     S('prilohy_info', 'Info o povolených souborech', 70, { description: 'Povolené formáty a velikost hlídá web sám, změna textu je nezmění.' }),
     S('nahrani_nadpis', 'Pole pro nahrání – nadpis', 50), S('nahrani_text', 'Pole pro nahrání – text', 90),
     field('zprava', 'Zpráva'),
-    S('souhlas_pred', 'Souhlas – text před odkazem', 40), S('souhlas_odkaz', 'Souhlas – text odkazu', 40), S('souhlas_za', 'Souhlas – text za odkazem', 40),
+    S('souhlas_pred', 'Zaškrtávátko u odeslání – text před odkazem', 40), S('souhlas_odkaz', 'Zaškrtávátko u odeslání – text odkazu', 40), S('souhlas_za', 'Zaškrtávátko u odeslání – text za odkazem', 40),
     S('tlacitko', 'Tlačítko pro odeslání', 28), S('pod_tlacitkem', 'Text pod tlačítkem', 70),
     S('hotovo_nadpis', 'Po odeslání – nadpis', 40), T('hotovo_text', 'Po odeslání – text', 160), S('hotovo_tlacitko', 'Po odeslání – tlačítko', 28),
   ]),
@@ -135,6 +135,8 @@ const spec = [
     S('mapa_stitek', 'Adresa na mapě (krátce)', 40), S('navigovat', 'Tlačítko „Navigovat“', 20),
     S('doba_nadpis', 'Nadpis „Otevírací doba“', 30), S('doba', 'Otevírací doba', 20), S('doba_poznamka', 'Poznámka k otevírací době', 40),
     S('fakturace_nadpis', 'Nadpis „Fakturační údaje“', 30), S('firma', 'Název firmy', 50), S('ico_dic', 'IČ a DIČ', 50),
+    S('sidlo', 'Sídlo firmy', 90, { description: 'Povinný údaj (§ 435 občanského zákoníku) – musí odpovídat obchodnímu rejstříku.' }),
+    S('rejstrik', 'Zápis v obchodním rejstříku', 100, { description: 'Povinný údaj (§ 435 občanského zákoníku) – soud, oddíl a vložka.' }),
   ]),
   O('paticka', 'Patička', [
     T('popis', 'Text pod logem', 140),

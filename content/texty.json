@@ -235,8 +235,8 @@
       "popisek": "Zpráva",
       "napoveda": "Popište, co si představujete. Klidně vlastními slovy."
     },
-    "souhlas_pred": "Souhlasím se",
-    "souhlas_odkaz": "zpracováním osobních údajů",
+    "souhlas_pred": "Beru na vědomí",
+    "souhlas_odkaz": "informace o zpracování osobních údajů",
     "souhlas_za": "pro vyřízení poptávky.",
     "tlacitko": "Odeslat poptávku",
     "pod_tlacitkem": "Ozveme se s kalkulací. Zdarma a nezávazně.",
@@ -265,7 +265,9 @@
     "doba_poznamka": "Návštěva po domluvě",
     "fakturace_nadpis": "Fakturační údaje",
     "firma": "Flavio company s.r.o.",
-    "ico_dic": "IČ 03923258 · DIČ CZ03923258"
+    "ico_dic": "IČ 03923258 · DIČ CZ03923258",
+    "sidlo": "Sídlo: Nad Rybníkem 180, Zeměchy, 278 01 Kralupy nad Vltavou",
+    "rejstrik": "Zapsaná v obchodním rejstříku u Městského soudu v Praze, oddíl C, vložka 239908"
   },
   "paticka": {
     "popis": "Strojová výšivka z Kralup nad Vltavou. Nášivky, výšivky a reklamní textil s nabídkou na míru.",
