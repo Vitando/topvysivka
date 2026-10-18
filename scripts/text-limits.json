@@ -62,30 +62,6 @@
   "uvod.foto_stitek": {
     "max": 30
   },
-  "pasky.horni1": {
-    "max": 30
-  },
-  "pasky.horni2": {
-    "max": 30
-  },
-  "pasky.horni3": {
-    "max": 30
-  },
-  "pasky.horni4": {
-    "max": 30
-  },
-  "pasky.dolni1": {
-    "max": 30
-  },
-  "pasky.dolni2": {
-    "max": 30
-  },
-  "pasky.dolni3": {
-    "max": 30
-  },
-  "pasky.dolni4": {
-    "max": 30
-  },
   "zaruky.zaruka1.nadpis": {
     "max": 40
   },

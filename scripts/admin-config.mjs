@@ -66,10 +66,6 @@ const spec = [
     S('poznamka', 'Poznámka pod tlačítky', 90),
     S('foto_stitek', 'Štítek na fotce', 30),
   ]),
-  O('pasky', 'Běžící pásy s textem', [
-    S('horni1', 'Horní pás – 1. text', 30), S('horni2', 'Horní pás – 2. text', 30), S('horni3', 'Horní pás – 3. text', 30), S('horni4', 'Horní pás – 4. text', 30),
-    S('dolni1', 'Dolní pás – 1. text', 30), S('dolni2', 'Dolní pás – 2. text', 30), S('dolni3', 'Dolní pás – 3. text', 30), S('dolni4', 'Dolní pás – 4. text', 30),
-  ], { description: 'Dva pruhy s pohyblivým textem pod úvodem.' }),
   O('zaruky', 'Záruky (čtyři výhody pod úvodem)', [nt('zaruka1', '1. záruka'), nt('zaruka2', '2. záruka'), nt('zaruka3', '3. záruka'), nt('zaruka4', '4. záruka')]),
   O('sluzby', 'Služby', [...head(), uvodSekce(), karta('nasivky', 'Nášivky'), karta('vysivky', 'Výšivky'), karta('textil', 'Reklamní textil')]),
   O('jak', 'Jak to funguje', [...head(), uvodSekce(), nt('krok1', '1. krok'), nt('krok2', '2. krok'), nt('krok3', '3. krok'), nt('krok4', '4. krok'), S('bublina', 'Bublina u maskota', 28)]),

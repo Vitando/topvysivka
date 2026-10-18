@@ -74,7 +74,7 @@
 .tv-sticker svg{width:100%;height:100%;overflow:visible}
 
 /* hero */
-.tv-hero{position:relative;background-color:var(--yellow);padding:26px 0 310px;overflow:hidden;isolation:isolate}
+.tv-hero{position:relative;background-color:var(--yellow);padding:26px 0 100px;overflow:hidden;isolation:isolate}
 .tv-hero__top{position:relative;z-index:4;display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:12px 28px;padding-top:14px;max-width:62%}
 .tv-hero__top p{font:600 16px/1.35 'Baloo 2',ui-rounded,sans-serif;max-width:330px;text-align:left}
 .tv-hero__title{position:relative;z-index:2;font-size:clamp(70px,23.4vw,600px);line-height:.86;margin-top:max(.45em,74px)}
@@ -104,12 +104,6 @@
 .tv-hero__3d{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;display:block}
 
 /* ribbons / marquee */
-.tv-ribbon{position:absolute;left:-6%;right:-6%;z-index:5;background:var(--ink);color:var(--yellow);border-block:3px solid var(--ink);padding:18px 0;overflow:hidden}
-.tv-ribbon::before,.tv-ribbon::after{content:"";position:absolute;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,var(--cream) 0 11px,transparent 11px 19px);opacity:.8}
-.tv-ribbon::before{top:6px}.tv-ribbon::after{bottom:6px}
-.tv-ribbon--front{bottom:132px;transform:rotate(-3.2deg)}
-.tv-ribbon--back{bottom:150px;transform:rotate(2.4deg);background:var(--pink);color:var(--ink);z-index:3}
-.tv-ribbon--back::before,.tv-ribbon--back::after{background:repeating-linear-gradient(90deg,var(--ink) 0 11px,transparent 11px 19px);opacity:.6}
 .tv-marquee{overflow:hidden}
 .tv-marquee__track{display:flex;width:max-content;animation:tvMarq 42s linear infinite;will-change:transform}
 .tv-marquee--rev .tv-marquee__track{animation-direction:reverse}
@@ -390,7 +384,7 @@ textarea.tv-input{min-height:136px;resize:vertical}
 @media (max-width:960px){
   .tv-nav,.tv-header__right .tv-mag{display:none}
   .tv-burger{display:inline-flex}
-  .tv-hero{padding:22px 0 270px}
+  .tv-hero{padding:22px 0 64px}
   .tv-hero__top p{display:none}
   .tv-hero__top{max-width:none}
   .tv-hero__row{grid-template-columns:1fr;gap:64px}
@@ -414,8 +408,6 @@ textarea.tv-input{min-height:136px;resize:vertical}
   .tv-hero__ctas .tv-mag,.tv-hero__ctas .tv-btn{width:100%}
   .tv-photo__tag{display:none}
   .tv-photo{border-radius:38px;box-shadow:8px 8px 0 var(--ink)}
-  .tv-ribbon{padding:14px 0}
-  .tv-ribbon--front{bottom:104px}.tv-ribbon--back{bottom:122px}
   .tv-head__aside{width:100%;justify-content:space-between}
   /* záruky jako kartičky-nášivky: ikona vlevo, vedle nadpis, pod ním text */
   .tv-guar{grid-template-columns:1fr;row-gap:18px}
@@ -426,7 +418,7 @@ textarea.tv-input{min-height:136px;resize:vertical}
   .tv-guar h3{font-size:21px}
   .tv-badge{width:64px;height:64px}
   .tv-badge svg{width:28px;height:28px}
-  .tv-svc__mascot{width:120px}
+  .tv-svc__mascot{display:none} /* na mobilu by odtlačil úvodní text daleko od nadpisu */
   .tv-patch{border-radius:50px;box-shadow:6px 8px 0 var(--ink)}
   .tv-patch__in{border-radius:40px;padding:32px 26px 28px}
   .tv-patch__in::after{border-radius:30px}

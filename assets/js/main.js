@@ -138,9 +138,7 @@ class TopVysivka extends Base {
         .fromTo(q('[data-draw="intro"]'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' }, 1.1)
         .from(q('.tv-photo'), { rotate: -16, scale: 0.7, opacity: 0, duration: 1.4, ease: 'back.out(1.5)' }, 0.4)
         .from(q('.tv-photo__tag'), { scale: 0, rotate: -50, duration: 0.8, ease: 'back.out(2.6)' }, 1.15)
-        .from(q('.tv-hero .tv-sticker'), { scale: 0, rotate: -140, duration: 1, stagger: 0.08, ease: 'back.out(2)' }, 0.7)
-        .from(q('.tv-ribbon--back'), { xPercent: 25, opacity: 0, duration: 1.3 }, 0.4)
-        .from(q('.tv-ribbon--front'), { xPercent: -25, opacity: 0, duration: 1.3 }, 0.5);
+        .from(q('.tv-hero .tv-sticker'), { scale: 0, rotate: -140, duration: 1, stagger: 0.08, ease: 'back.out(2)' }, 0.7);
 
       /* maskot: mrkání, pohupování, vyšívání, mávání */
       q('.tv-eyes').forEach((e, i) => {
