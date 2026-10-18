@@ -97,7 +97,8 @@ class TopVysivka extends Base {
       if (!ws[0]) return;
       h1.style.fontSize = Math.max(48, base * (avail / ws[0]) * 0.985) + 'px';
       lines.forEach((l, i) => { if (i > 0 && ws[i]) l.style.fontSize = Math.min(1.3, ws[0] / ws[i]) + 'em'; });
-      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      // přepočet všech scroll animací je drahý → sloučit opakovaná volání během načítání do jednoho
+      if (window.ScrollTrigger) { clearTimeout(this._stRefresh); this._stRefresh = setTimeout(() => { if (this._alive) window.ScrollTrigger.refresh(); }, 200); }
     };
     run();
     this.whenFontsChange(run);
@@ -272,7 +273,8 @@ class TopVysivka extends Base {
     const vis = svg.querySelector('.tv-thread__vis');
     const clip = svg.querySelector('.tv-thread__clip');
     const needle = svg.querySelector('.tv-thread__needle');
-    const T = { total: 1, ys: [], step: 4, p: animate ? 0 : 1, H: 9000 };
+    // step: po kolika px délky se nit proměří (getPointAtLength je drahé – 4 px = tisíce volání a zaseknutí při načítání)
+    const T = { total: 1, ys: [], step: 24, p: animate ? 0 : 1, H: 9000, W: 0 };
 
     /* Nit se odkrývá shora dolů výřezem (clip-path), ne maskou: maska přes celou
        stránku je pro GPU obří obrázek a prohlížeč pak nevykreslí jiné vrstvy. */
@@ -295,15 +297,17 @@ class TopVysivka extends Base {
       if (y >= ys[ys.length - 1]) return T.total;
       let lo = 0, hi = ys.length - 1;
       while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (ys[mid] < y) lo = mid; else hi = mid; }
-      return hi * T.step;
+      const span = ys[hi] - ys[lo];
+      return (lo + (span > 0 ? (y - ys[lo]) / span : 1)) * T.step; // dopočet mezi proměřenými body
     };
 
     const build = () => {
       if (!this._alive) return;
       const W = main.clientWidth, H = main.offsetHeight;
       if (!W || !H) return;
+      if (W === T.W && H === T.H && T.ys.length) return; // rozměry se nezměnily → nic nepřepočítávat
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      T.H = H;
+      T.H = H; T.W = W;
       clip.setAttribute('width', String(W + 80));
       const secs = Array.prototype.filter.call(main.children, (el) => el.tagName === 'SECTION');
       const wrap = main.querySelector('.tv-wrap');
@@ -340,10 +344,11 @@ class TopVysivka extends Base {
     build();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
     if (window.ResizeObserver) {
-      let raf = 0;
-      const ro = new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(build); });
+      // při načítání se výška mění mnohokrát (písma, obrázky) → sloučit do jednoho přepočtu
+      let tmr = 0;
+      const ro = new ResizeObserver(() => { clearTimeout(tmr); tmr = setTimeout(build, 250); });
       ro.observe(main);
-      this._clean.push(() => { cancelAnimationFrame(raf); ro.disconnect(); });
+      this._clean.push(() => { clearTimeout(tmr); ro.disconnect(); });
     }
 
     const gsap = window.gsap;
