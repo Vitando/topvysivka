@@ -179,7 +179,6 @@ class TopVysivka extends Base {
 
       /* nášivky se „přišijí": spadnou, zhoupnou se a usadí */
       gsap.from(q('.tv-patch'), { y: -180, rotate: (i) => [-16, 12, -9][i % 3], opacity: 0, duration: 1.5, stagger: 0.15, ease: 'elastic.out(1, 0.6)', clearProps: 'transform,opacity', scrollTrigger: st(q('.tv-patches')[0], { start: 'top 80%' }) });
-      gsap.from(q('.tv-head__aside .tv-svc__mascot'), { y: 120, rotate: 20, opacity: 0, duration: 1.2, ease: 'back.out(1.8)', scrollTrigger: st(q('.tv-head__aside')[0]) });
 
       /* kroky */
       const steps = q('.tv-steps')[0];
