@@ -72,6 +72,7 @@
 /* stickers */
 .tv-sticker{position:absolute;z-index:3;pointer-events:none}
 .tv-sticker svg{width:100%;height:100%;overflow:visible}
+@media (max-width:600px){.tv-sticker--desk{display:none}} /* na telefonu by překrývala text úvodu */
 
 /* hero */
 .tv-hero{position:relative;background-color:var(--yellow);padding:26px 0 100px;overflow:hidden;isolation:isolate}
@@ -180,7 +181,8 @@
 /* instagram */
 .tv-ig{overflow:hidden}
 .tv-ig__big{font-size:clamp(78px,16vw,260px);text-align:center;position:relative;z-index:0}
-.tv-ig__top{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.tv-ig__top{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;position:relative;z-index:1}
+.tv-ig > .tv-sticker{z-index:0} /* kytka a hvězda za nadpisem, ne přes písmena */
 .tv-ig__lead{max-width:520px;font-size:19px;color:var(--ink2)}
 .tv-ig__grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,34px);max-width:1040px;margin:clamp(36px,4vw,56px) auto 0}
 .tv-polaroid{position:relative;display:block;background:var(--cream);padding:12px 12px 14px;border:3px solid var(--ink);border-radius:14px;box-shadow:6px 8px 0 var(--ink);text-decoration:none;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
