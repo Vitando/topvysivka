@@ -648,8 +648,22 @@ class TopVysivka extends Base {
     var burger = root.querySelector('.tv-burger');
     var mnav = root.querySelector('#tv-mnav');
     if (burger && mnav) {
-      var setMenu = function (open) { mnav.hidden = !open; burger.setAttribute('aria-expanded', String(open)); };
-      burger.addEventListener('click', function () { setMenu(mnav.hidden); });
+      var menuTimer = 0;
+      mnav.querySelectorAll('a').forEach(function (a, i) { a.style.setProperty('--i', i); });
+      var setMenu = function (open) {
+        if (open === (burger.getAttribute('aria-expanded') === 'true')) return;
+        burger.setAttribute('aria-expanded', String(open));
+        clearTimeout(menuTimer);
+        if (open) {
+          mnav.hidden = false;
+          void mnav.offsetHeight; // vykreslit zavřený stav, ať se animace spustí
+          mnav.classList.add('is-open');
+        } else {
+          mnav.classList.remove('is-open');
+          menuTimer = setTimeout(function () { mnav.hidden = true; }, 500); // až po zavírací animaci
+        }
+      };
+      burger.addEventListener('click', function () { setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
       mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
     }

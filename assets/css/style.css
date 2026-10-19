@@ -65,6 +65,19 @@
 .tv-header__right{display:flex;align-items:center;gap:12px}
 .tv-burger{display:none;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;border:3px solid var(--ink);background:var(--yellow);cursor:pointer;color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
 .tv-burger svg{width:24px;height:24px}
+/* menu na telefonu: panel se rozvine shora, odkazy naskáčou postupně, burger se změní na křížek */
+.tv-burger{transition:background-color .25s}
+.tv-burger[aria-expanded="true"]{background:var(--pink)}
+.tv-burger svg{transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.tv-burger[aria-expanded="true"] svg{transform:rotate(90deg)}
+.tv-burger path{transform-box:fill-box;transform-origin:center;transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .2s}
+.tv-burger[aria-expanded="true"] .tv-burger__l1{transform:translateY(5px) rotate(45deg)}
+.tv-burger[aria-expanded="true"] .tv-burger__l2{opacity:0;transform:scaleX(0)}
+.tv-burger[aria-expanded="true"] .tv-burger__l3{transform:translateY(-5px) rotate(-45deg)}
+.tv-mnav{clip-path:inset(0 0 100% 0);transition:clip-path .5s cubic-bezier(.7,0,.2,1)}
+.tv-mnav.is-open{clip-path:inset(0 0 -40px 0)}
+.tv-mnav > a{opacity:0;transform:translateY(-18px) rotate(-4deg);transform-origin:left center;transition:opacity .25s,transform .25s}
+.tv-mnav.is-open > a{opacity:1;transform:none;transition:opacity .4s,transform .55s cubic-bezier(.34,1.56,.64,1);transition-delay:calc(var(--i,0) * 60ms + 140ms)}
 .tv-mnav{position:absolute;top:calc(100% + 2px);left:0;right:0;background:var(--pink);border-bottom:3px solid var(--ink);padding:10px clamp(16px,4vw,56px) 24px;display:flex;flex-direction:column}
 .tv-mnav a{display:flex;align-items:center;min-height:62px;font:400 38px/1 'Anton',Impact,sans-serif;text-transform:uppercase;text-decoration:none;border-bottom:3px dashed rgba(59,36,24,.4)}
 .tv-mnav .tv-btn{margin-top:18px;font:600 18px/1 'Baloo 2',ui-rounded,sans-serif;text-transform:none;border-bottom:3px solid var(--ink);min-height:58px}
