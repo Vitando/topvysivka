@@ -9,7 +9,7 @@ Statický one-page web: čisté HTML + CSS + JavaScript, bez build kroku.
   `npx serve .` nebo `python3 -m http.server 8000` → http://localhost:8000
 - Nasazení: **Cloudflare Workers** (statický web) napojené na GitHub (každý push do `main` = nové nasazení).
   Build command `node scripts/build-site.mjs`, Deploy command `npx wrangler deploy` (nastavení ve `wrangler.jsonc`)
-  – na web jde jen `index.html`, `zasady.html`, `assets/` a `_headers`. Přechodně běží i Vercel (`vercel.json`, `.vercelignore`), po přesunu domény ho smazat.
+  – na web jde jen `index.html`, `zasady.html`, `assets/` a `_headers`.
 
 ## Struktura
 
@@ -21,8 +21,8 @@ assets/js/vendor/          GSAP 3.13 + ScrollTrigger, Three.js r158 (3D se stahu
 assets/js/consent.js       cookie lišta, měření (GA4 / Meta Pixel) až po souhlasu
 assets/fonts/              písma (Anton, DM Sans, Baloo 2) hostovaná u nás, bez Google Fonts
 zasady.html                zásady ochrany osobních údajů
-obchodni-podminky.html     obchodní podmínky a reklamační řád – NÁVRH, zatím neodkazovaný (noindex), po schválení klientem
-                           doplnit datum účinnosti, smazat žlutý rámeček, přidat odkaz do patičky a do sitemap.xml
+obchodni-podminky.html     obchodní podmínky – text dodaný klientem (Flavio company), převzatý slovo od slova;
+                           za obsah odpovídá klient, změny jen na jeho pokyn
 404.html                   stránka „nenalezeno“ (Cloudflare ji vrací pro neexistující adresy)
 robots.txt, sitemap.xml    pro vyhledávače
 assets/img/favicon.svg     ikona v záložce; apple-touch-icon.png pro iPhone; og-image.jpg = náhled při sdílení (1200×630)
@@ -30,7 +30,6 @@ _headers                   bezpečnostní hlavičky pro Cloudflare (CSP, HSTS…
 wrangler.jsonc             nastavení Cloudflare Workers (web = složka dist/, /api/* = src/worker.js)
 src/worker.js              příjem poptávek z formuláře a odeslání e-mailem (Resend)
 scripts/build-site.mjs     sestaví dist/ pro Cloudflare
-vercel.json                totéž pro Vercel (dočasně, do přesunu na Cloudflare)
 assets/img/                fotka do úvodu, práce (Instagram), loga zákazníků
 ```
 
@@ -104,7 +103,7 @@ Texty webu může klient upravovat sám přes [Pages CMS](https://app.pagescms.o
 - **Pravidla lišty** (§ 89 zákona č. 127/2005 Sb., GDPR, doporučení ÚOOÚ a EDPB): odmítnutí je stejně snadné jako přijetí
   (stejná tlačítka v první vrstvě), nic není předem zaškrtnuté, volba platí 6 měsíců, souhlas jde kdykoli změnit.
   Přidání dalšího nástroje = zvýšit `CONSENT_VERSION`, doplnit ho do lišty a do `zasady.html`.
-- **Bezpečnostní hlavičky** jsou v `_headers` (Cloudflare) a dočasně i ve `vercel.json` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
+- **Bezpečnostní hlavičky** jsou v `_headers` (Content-Security-Policy, HSTS, X-Frame-Options, Referrer-Policy,
   Permissions-Policy, nosniff). CSP povoluje jen náš web, Google Analytics, Meta Pixel a služby formuláře
   vlastní `/api/poptavka`. **Jiný měřicí nástroj nebo externí služba = přidat jeho doménu do CSP**, jinak ho prohlížeč zablokuje.
 - Na web se nasazuje jen složka `dist/` (README, administrace, skripty ani `content/` na webu nejsou).

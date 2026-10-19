@@ -1,7 +1,6 @@
 .DS_Store
 Thumbs.db
 node_modules/
-.vercel
 
 # tajné údaje nikdy do repozitáře
 .env

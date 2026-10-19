@@ -141,6 +141,7 @@ const spec = [
     S('sledujte', 'Nadpis „Sledujte nás“', 16),
     S('rozlouceni', 'Velký text na konci', 14, { description: BIG }),
     S('copyright', 'Řádek s copyrightem', 90),
+    S('podminky', 'Text „Obchodní podmínky“', 30),
     S('zasady', 'Text „Zásady ochrany osobních údajů“', 40),
     S('cookies', 'Text „Nastavení cookies“', 25, { description: 'Odkaz je vidět jen tehdy, když web používá měření (Google Analytics / Meta Pixel).' }),
   ]),

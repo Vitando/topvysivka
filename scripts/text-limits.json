@@ -496,6 +496,9 @@
   "paticka.copyright": {
     "max": 90
   },
+  "paticka.podminky": {
+    "max": 30
+  },
   "paticka.zasady": {
     "max": 40
   },

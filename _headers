@@ -1,4 +1,4 @@
-# Hlavičky pro Cloudflare (Workers – statický web) (stejné jako vercel.json, ten se po přesunu smaže)
+# Hlavičky pro Cloudflare (Workers – statický web)
 # Formát: https://developers.cloudflare.com/workers/static-assets/headers/
 
 /*

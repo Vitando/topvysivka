@@ -1358,6 +1358,13 @@ content:
             required: true
             options:
               maxlength: 90
+          - name: podminky
+            label: "Text „Obchodní podmínky“"
+            description: "Max. 30 znaků."
+            type: string
+            required: true
+            options:
+              maxlength: 30
           - name: zasady
             label: "Text „Zásady ochrany osobních údajů“"
             description: "Max. 40 znaků."
