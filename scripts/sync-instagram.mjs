@@ -15,7 +15,7 @@ import { readFile, writeFile, mkdir, readdir, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const FEED_URL = process.env.BEHOLD_FEED_URL || 'https://feeds.behold.so/PP8w0EJWDQ0HDUtMJgjM';
+const FEED_URL = process.env.BEHOLD_FEED_URL || 'https://feeds.behold.so/wLOkwh7DdkwMf8uFw2Ju';
 const PROFILE_URL = process.env.INSTAGRAM_PROFILE_URL || 'https://www.instagram.com/topvysivka.cz/';
 // Galerie se plní jen z tohoto účtu; feed napojený na jiný účet se ignoruje
 const EXPECTED_USERNAME = process.env.INSTAGRAM_USERNAME || 'topvysivka.cz';
