@@ -320,7 +320,7 @@ input.tv-input[type="date"]::-webkit-date-and-time-value{text-align:left}
 .tv-sent{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding:10px 4px}
 .tv-sent__mascot{width:clamp(150px,16vw,210px)}
 .tv-sent__mascot svg{width:100%;height:auto;overflow:visible}
-.tv-sent h3{font:400 clamp(46px,5vw,76px)/.95 'Anton',Impact,sans-serif;text-transform:uppercase}
+.tv-sent h3{font:400 clamp(46px,5vw,76px)/1.2 'Anton',Impact,sans-serif;text-transform:uppercase}
 .tv-sent p{font-size:18px;max-width:440px;margin-top:14px}
 .tv-sent .tv-btn{margin-top:22px}
 
