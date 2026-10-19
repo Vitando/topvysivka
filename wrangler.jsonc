@@ -19,5 +19,7 @@
     "FORM_FROM": "Top výšivka – web <poptavky@topvysivka.cz>",
     "FORM_CONFIRM": "1"
   },
+  // proměnné přidané ručně v Cloudflare (Settings → Variables and Secrets) se při nasazení z GitHubu nemažou
+  "keep_vars": true,
   "observability": { "enabled": true }
 }
