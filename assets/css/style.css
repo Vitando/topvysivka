@@ -369,7 +369,8 @@ input.tv-input[type="date"]::-webkit-date-and-time-value{text-align:left}
 .tv-legal{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:40px;padding-top:22px;border-top:3px dashed rgba(255,246,226,.3);font-size:14.5px;color:#E3D2C2}
 
 /* cookie lišta */
-.tv-legal__links{display:flex;flex-wrap:wrap;gap:6px 22px}
+.tv-legal__links{display:flex;flex-wrap:wrap;gap:2px 22px}
+.tv-legal__links a{padding:3px 0} /* na telefonu dost velké na ťuknutí (min. 24 px) */
 .tv-cc{position:fixed;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);z-index:300;width:min(440px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;padding:24px 24px 18px;border:3px solid var(--ink);border-radius:26px;background:var(--paper);color:var(--ink);box-shadow:8px 8px 0 var(--ink);opacity:0;transform:translateY(16px);transition:opacity .3s,transform .4s cubic-bezier(.3,1.4,.5,1)}
 .tv-cc.is-on{opacity:1;transform:none}
 .tv-cc__title{font:700 24px/1.15 'Baloo 2',ui-rounded,sans-serif;letter-spacing:-.01em}
