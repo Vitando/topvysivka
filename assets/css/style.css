@@ -207,6 +207,7 @@
 .tv-label--0{--c:var(--pink)}.tv-label--1{--c:var(--sky)}.tv-label--2{--c:var(--yellow)}.tv-label--3{--c:var(--mint)}
 .tv-logos__head{flex-direction:column;align-items:center;gap:18px;text-align:center;margin-bottom:46px}
 .tv-logos__title{font-size:clamp(46px,6.4vw,104px)}
+.tv-d[data-lines]{max-width:100%}
 .tv-logos .tv-marquee{padding:6px 0 12px}
 .tv-logos .tv-marquee__track{will-change:auto}
 .tv-lcard{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;height:124px;min-width:230px;margin-right:22px;padding:20px 36px;border-radius:22px;background:var(--paper);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
@@ -278,6 +279,9 @@
 .tv-input::placeholder{color:#8C7468}
 .tv-input:focus{outline:none;box-shadow:0 0 0 4px var(--yellow),0 0 0 7px var(--ink)}
 textarea.tv-input{min-height:136px;resize:vertical}
+/* iOS dává poli s datem vlastní min. šířku a styl → přetékalo z formuláře */
+input.tv-input[type="date"]{display:block;min-width:0;max-width:100%;-webkit-appearance:none;appearance:none;text-align:left}
+input.tv-input[type="date"]::-webkit-date-and-time-value{text-align:left}
 .tv-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .tv-chip{--c:var(--pink);position:relative;display:block;cursor:pointer}
 .tv-chip--1{--c:var(--sky)}.tv-chip--2{--c:var(--yellow)}.tv-chip--3{--c:var(--mint)}
@@ -339,6 +343,7 @@ textarea.tv-input{min-height:136px;resize:vertical}
 .tv-footer{position:relative;background-color:var(--ink);color:var(--cream);padding:clamp(84px,9vw,124px) 0 34px;overflow:hidden}
 .tv-fgrid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:40px}
 .tv-footer .tv-logo{color:var(--cream)}
+.tv-footer .tv-sticker{z-index:0} /* dekorace pod texty patičky, ne přes ně */
 .tv-footer__tag{margin-top:16px;max-width:300px;color:#F1E3D2}
 .tv-footer h4{font:600 14px/1 'Baloo 2',ui-rounded,sans-serif;text-transform:uppercase;letter-spacing:.13em;color:var(--sky);margin-bottom:16px}
 .tv-flinks{display:flex;flex-direction:column;gap:4px}
