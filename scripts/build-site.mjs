@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist');
-const SITE = ['index.html', 'zasady.html', 'obchodni-podminky.html', '404.html', 'robots.txt', 'sitemap.xml', 'assets', '_headers'];
+const SITE = ['index.html', 'zasady.html', 'obchodni-podminky.html', '404.html', 'robots.txt', 'sitemap.xml', 'favicon.ico', 'assets', '_headers'];
 
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT);
