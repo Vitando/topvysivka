@@ -14,7 +14,7 @@
 (function () {
   'use strict';
 
-  var GA4_ID = '';          // Google Analytics 4, např. 'G-ABC123XYZ'
+  var GA4_ID = 'G-66PMP7TFYT';  // Google Analytics 4, např. 'G-ABC123XYZ'
   var META_PIXEL_ID = '';   // Meta (Facebook) Pixel, např. '1234567890'
 
   var CONSENT_VERSION = 1;
